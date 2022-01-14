@@ -14,8 +14,6 @@ export default function App() {
   if (!session) {
     return (
       <Layout>
-        <button onClick={(e) => signIn("google")}>Google</button>
-        <button onClick={(e) => signIn("github")}>Github</button>
         <button onClick={() => setPopupState(true)}>Get Started</button>
         <Popup popupState={popupState} ref={popupRef} center>
           <h1 className={styles["popup__login__heading"]}>I am a...</h1>
