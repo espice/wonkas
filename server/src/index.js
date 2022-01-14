@@ -3,13 +3,17 @@ dotenv.config();
 
 require("module-alias/register");
 
+
 const express = require("express");
 const cookieParser = require("cookie-parser");
 const mongoose = require("mongoose");
-
 const auth = require("@routes/auth");
-
 const app = express();
+
+const server = require("http").createServer(app);
+
+const io = require("socket.io")(server);
+
 
 mongoose
   .connect(process.env.MONGODB_URI, {
@@ -41,7 +45,13 @@ app.get("/", (req, res) => {
   res.send("Hello World!");
 });
 
+io.on("connection", (socket) => {
+  console.log(socket.id)
+})
+
 const port = process.env.PORT || 4000;
-app.listen(port, () => {
+server.listen(port, () => {
   console.log(`Server Listening on port ${port}`);
 });
+
+

@@ -1,4 +1,5 @@
 .popup {
+  position: relative;
   &__login {
     &__close {
       content: url("https://api.iconify.design/eva/close-fill.svg?color=%239210CF&width=28&height=28");
@@ -10,7 +11,7 @@
       }
     }
     width: 100%;
-    height: 50vh;
+    height: 69vh;
     display: flex;
     flex-flow: column;
 
@@ -37,7 +38,6 @@
         transition: all 0.2s;
         cursor: pointer;
         border: 4px solid transparent;
-        font-weight: 500;
 
         &:hover {
           background: rgba(92, 0, 153, 0.76);
@@ -58,7 +58,6 @@
           font-size: 15px;
           transition: all 0.2s;
           cursor: pointer;
-          font-weight: 500;
         }
       }
     }
