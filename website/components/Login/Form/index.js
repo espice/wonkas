@@ -36,8 +36,11 @@ export default function LoginForm({ method, setOpen }) {
           <div className={styles.popup__form__providers}>
             <div
               className={styles.popup__form__providers__provider}
-              onClick={(e) => {
-                signIn("google");
+              onClick={async (e) => {
+                await signIn("google", {
+                  callbackUrl: "http://localhost:3000/auth",
+                });
+                console.log("hello world");
               }}
             >
               <p>Sign in with Google</p>
@@ -52,7 +55,9 @@ export default function LoginForm({ method, setOpen }) {
             <div
               className={styles.popup__form__providers__provider}
               onClick={(e) => {
-                signIn("discord");
+                signIn("discord", {
+                  callbackUrl: "http://localhost:3000/auth",
+                });
               }}
             >
               <p>Sign in with Discord</p>

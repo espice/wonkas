@@ -18,7 +18,7 @@ export default NextAuth({
       console.log(message);
     },
     async signIn(req, userAcc) {
-      console.log(userAcc.OAuthProfile);
+
     },
   },
   pages: {
