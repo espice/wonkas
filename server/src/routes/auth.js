@@ -8,6 +8,7 @@ const User = require("@models/user");
 
 router.post("/login", async (req, res) => {
   const type = req.body.role;
+  console.log(req.body);
 
   if (type == "customer") {
     const user = {
@@ -39,7 +40,6 @@ router.post("/login", async (req, res) => {
 
   return res.send({ success: "false", message: "Invalid Type" });
 });
-
 
 router.get("/me", auth, async (req, res) => {
   console.log("Hello World!");
