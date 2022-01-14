@@ -10,6 +10,29 @@ router.post("/login", async (req, res) => {
   const type = req.body.role;
 
   if (type == "customer") {
+    const user = {
+      email: req.body.email,
+      name: req.body.name,
+      photoUrl: req.body.photoUrl,
+      role: "customer",
+    };
+
+    const dbUser = await User.findOne({ email: user.email });
+
+    if (!dbUser) {
+      const newUser = await User.create(user);
+      const token = jwt.sign({ id: newUser._id }, process.env.JWT_KEY);
+
+      return res
+        .cookie("token", token, { httpOnly: true, maxAge: 15552000000 })
+        .send({ success: true, user: newUser });
+    } else {
+      const token = jwt.sign({ id: dbUser._id }, process.env.JWT_KEY);
+
+      return res
+        .cookie("token", token, { httpOnly: true, maxAge: 15552000000 })
+        .send({ success: true, user: dbUser });
+    }
   }
   if (type == "oompaloompa") {
   }
@@ -17,33 +40,6 @@ router.post("/login", async (req, res) => {
   return res.send({ success: "false", message: "Invalid Type" });
 });
 
-// router.post("/login", async (req: any, res: any) => {
-//   console.log(req.body);
-//   if (!req.body.name || !req.body.email || !req.body.photoUrl)
-//     return res.send({ success: false, message: "Missing Credentials" });
-
-//   const user: UserInterface = {
-//     name: req.body.name,
-//     email: req.body.email,
-//   };
-
-//   const mongooseUser: DBUserInterface | null = await User.findOne({
-//     email: user.email,
-//   });
-//   if (!mongooseUser) {
-//     const newUser = await User.create(user);
-//     const token = jwt.sign({ id: newUser._id }, process.env.JWT_KEY!);
-
-//     return res
-//       .cookie("token", token, { httpOnly: true, maxAge: 15552000000 })
-//       .send({ success: true, user: newUser });
-//   }
-
-//   const token = jwt.sign({ id: mongooseUser._id }, process.env.JWT_KEY!);
-//   return res
-//     .cookie("token", token, { httpOnly: true, maxAge: 15552000000 })
-//     .send({ success: true, user: mongooseUser });
-// });
 
 router.get("/me", auth, async (req, res) => {
   console.log("Hello World!");

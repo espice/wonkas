@@ -15,6 +15,10 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    password: {
+      type: String,
+      default: "",
+    },
     role: {
       type: ["oompaloompa", "customer"],
       required: [true, "User type is missing"],
@@ -22,7 +26,7 @@ const userSchema = new mongoose.Schema(
     isManager: { type: Boolean, default: false },
     tasks: { type: Array, default: [] },
     notifs: { type: Array, default: [] },
-    location: { type: String },
+    location: { type: String, default: "" },
   },
   { timestamps: true }
 );
