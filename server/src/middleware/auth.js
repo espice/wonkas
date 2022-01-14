@@ -1,7 +1,6 @@
-import { NextFunction } from "express";
-import jwt from "jsonwebtoken";
+const jwt = require("jsonwebtoken")
 
-function auth(req: any, res: any, next: NextFunction) {
+function auth(req, res, next) {
   const token = req.cookies.token;
   console.log(token);
 
@@ -11,7 +10,7 @@ function auth(req: any, res: any, next: NextFunction) {
   }
 
   try {
-    let decoded = jwt.verify(token, process.env.JWT_KEY!);
+    let decoded = jwt.verify(token, process.env.JWT_KEY);
     req.user = decoded;
     next();
   } catch (e) {
@@ -19,4 +18,4 @@ function auth(req: any, res: any, next: NextFunction) {
   }
 }
 
-export default auth;
+module.exports = auth;

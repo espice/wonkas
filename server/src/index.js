@@ -1,18 +1,18 @@
-import dotenv from "dotenv";
+const dotenv = require("dotenv");
 dotenv.config();
 
-import "module-alias/register";
+require("module-alias/register");
 
-import express, { Application } from "express";
-import cookieParser from "cookie-parser";
-import mongoose from "mongoose";
+const express = require("express");
+const cookieParser = require("cookie-parser");
+const mongoose = require("mongoose");
 
-import auth from "@routes/auth";
+const auth = require("@routes/auth");
 
-const app: Application = express();
+const app = express();
 
 mongoose
-  .connect(process.env.MONGODB_URI!, {
+  .connect(process.env.MONGODB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false,

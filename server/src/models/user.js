@@ -1,6 +1,4 @@
-import mongoose from "mongoose";
-
-export interface DBUserInterface extends mongoose.Document, UserInterface {}
+const mongoose = require("mongoose");
 
 const userSchema = new mongoose.Schema(
   {
@@ -29,6 +27,6 @@ const userSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const User = mongoose.model<DBUserInterface>("User", userSchema);
+const User = mongoose.model("User", userSchema);
 
-export default User;
+module.exports = User;

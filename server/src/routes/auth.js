@@ -1,10 +1,21 @@
-import { Router } from "express";
-import jwt from "jsonwebtoken";
-import auth from "@middleware/auth";
+const { Router } = require("express");
+const jwt = require("jsonwebtoken");
+const auth = require("@middleware/auth");
 const router = Router();
 
 //models
-import User, { DBUserInterface } from "@models/user";
+const User = require("@models/user");
+
+router.post("/login", async (req, res) => {
+  const type = req.body.role;
+
+  if (type == "customer") {
+  }
+  if (type == "oompaloompa") {
+  }
+
+  return res.send({ success: "false", message: "Invalid Type" });
+});
 
 // router.post("/login", async (req: any, res: any) => {
 //   console.log(req.body);
@@ -34,7 +45,7 @@ import User, { DBUserInterface } from "@models/user";
 //     .send({ success: true, user: mongooseUser });
 // });
 
-router.get("/me", auth, async (req: any, res) => {
+router.get("/me", auth, async (req, res) => {
   console.log("Hello World!");
   if (!req.user)
     return res.send({ success: false, message: "Invalid Session" });
@@ -47,4 +58,4 @@ router.post("/logout", auth, (req, res) => {
   res.clearCookie("token").send({ success: true });
 });
 
-export default router;
+module.exports = router;
