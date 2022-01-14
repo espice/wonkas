@@ -1,33 +1,4 @@
-.popup {
-  &__login {
-    &__heading {
-      text-align: center;
-      color: var(--cool-grey-900);
-    }
-
-    &__container {
-      margin-top: auto;
-      display: flex;
-      flex-flow: column;
-      gap: 15px;
-
-      &__button {
-        padding-top: 18px;
-        padding-bottom: 18px;
-        text-align: center;
-        width: 100%;
-        background: rgba(92, 0, 153, 0.7);
-        border: none;
-        border-radius: 6px;
-        color: white;
-        font-size: 15px;
-        transition: all 0.2s;
-        cursor: pointer;
-
-        &:hover {
-          background: rgba(92, 0, 153, 0.76);
-        }
-      }
-    }
-  }
+#login-popup{
+  min-width: 40vw;
+  min-height: 50vh;
 }
