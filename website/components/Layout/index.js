@@ -15,8 +15,8 @@ const Layout = ({ children, title }) => {
         <meta name="theme-color" content="#0a6cff" />
         <title>{title}</title>
       </Head>
+      <div>{children}</div>
       <div id="popupContainer"></div>
-      <div style={{ display: "flex" }}>{children}</div>
     </div>
   );
 };
