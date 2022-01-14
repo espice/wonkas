@@ -16,8 +16,13 @@ export default function App() {
     return (
       <Layout>
         <button onClick={() => setPopupState(true)}>Get Started</button>
-        <Popup popupState={popupState} ref={popupRef} center id={styles["login-popup"]}>
-          <Login setPopupState={setPopupState}/>
+        <Popup
+          popupState={popupState}
+          ref={popupRef}
+          center
+          // classname={styles["login-popup"]}
+        >
+          <Login setPopupState={setPopupState} />
         </Popup>
       </Layout>
     );
