@@ -1,11 +1,5 @@
 import mongoose from "mongoose";
 
-// export interface DBUserInterface extends mongoose.Document{
-//     name: string;
-//     email: string;
-//     photoUrl: string
-// }
-
 export interface DBUserInterface extends mongoose.Document, UserInterface {}
 
 const userSchema = new mongoose.Schema({
@@ -21,6 +15,14 @@ const userSchema = new mongoose.Schema({
   photoUrl: {
     type: String,
   },
+  role: {
+    type: ["oompaloompa", "customer"],
+    required: [true, "User type is missing"],
+  },
+  isManager: { type: Boolean, default: false },
+  tasks: { type: Array, default: [] },
+  notifs: { type: Array, default: [] },
+  location: { type: String },
 });
 
 const User = mongoose.model<DBUserInterface>("User", userSchema);

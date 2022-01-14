@@ -17,7 +17,9 @@ router.post("/login", async (req: any, res: any) => {
     photoUrl: req.body.photoUrl,
   };
 
-  const mongooseUser: DBUserInterface | null = await User.findOne({ email: user.email });
+  const mongooseUser: DBUserInterface | null = await User.findOne({
+    email: user.email,
+  });
   if (!mongooseUser) {
     const newUser = await User.create(user);
     const token = jwt.sign({ id: newUser._id }, process.env.JWT_KEY!);
