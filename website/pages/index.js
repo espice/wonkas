@@ -27,7 +27,7 @@ export default function App() {
           popupState={popupState}
           ref={popupRef}
           center
-          id={styles["login-popup"]}
+          className={styles["login-popup"]}
         >
           {loginPopupStep == 0 ? (
             <LoginChooser

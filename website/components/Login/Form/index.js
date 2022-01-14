@@ -36,8 +36,9 @@ export default function LoginForm({ method, setOpen }) {
           <div className={styles.popup__form__providers}>
             <div
               className={styles.popup__form__providers__provider}
-              onClick={(e) => {
-                signIn("google");
+              onClick={async (e) => {
+                const res = await signIn("google");
+                console.log(res);
               }}
             >
               <p>Sign in with Google</p>

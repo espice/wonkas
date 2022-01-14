@@ -6,6 +6,7 @@ export default function LoginChooser({setPopupState,method,setMethod,setStep}){
         return(
         <div className={styles["popup__login"]}>
             <div className={styles["popup__login__close"]} onClick={(e)=>{setPopupState(false);setMethod("");setStep(0)}}/>
+            <div style={{height: "30px"}}></div>
             <h1 className={styles["popup__login__heading"]}>I am a...</h1>
 
             <div className={styles["popup__login__container"]}>
