@@ -14,7 +14,6 @@ router.post("/login", async (req: any, res: any) => {
   const user: UserInterface = {
     name: req.body.name,
     email: req.body.email,
-    photoUrl: req.body.photoUrl,
   };
 
   const mongooseUser: DBUserInterface | null = await User.findOne({
