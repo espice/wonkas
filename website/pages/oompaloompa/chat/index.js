@@ -2,13 +2,14 @@ import React, { useEffect } from "react";
 import socket from "socket.io-client";
 import Layout from "../../../components/Layout";
 import UserContext from "../../../components/userContext";
+import Message from "../../../components/Chat/Message";
 import { useContext, useState } from "react";
 
 import Sidebar from "../../../components/SideNav";
 import styles from "./index.module.scss";
 
 const Chat = () => {
-  const user = useContext(UserContext);
+  const { user } = useContext(UserContext);
   const [location, setLocation] = useState(undefined);
   const [message, setMessage] = useState("");
   const [id, setId] = useState("");
@@ -18,13 +19,12 @@ const Chat = () => {
   const [ioTrue, setIoTrue] = useState(false);
   const [author, setAuthor] = useState({});
   useEffect(() => {
-    setLocation(user.user.location);
-    setId(user.user._id);
-    setAuthor(user.user);
+    setLocation(user.location);
+    setId(user._id);
+    setAuthor(user);
 
     console.log(id);
-    console.log(user.user.location);
-    console.log(author);
+    console.log(user);
     if (location !== undefined) {
       console.log("okbr");
       console.log(location);
@@ -72,16 +72,10 @@ const Chat = () => {
       <Sidebar />
       <div className={styles.main}>
         <h1 className={styles.main__heading}>Chat</h1>
-
+        <p>For {user.location} workers</p>
         <div className={styles.main__messages}>
           {messages.map((message) => {
-            return (
-              <div>
-                <img src={message.author.photoUrl} alt="" />
-                <h1>{message.message}</h1>
-                <h2>{message.author.name}</h2>
-              </div>
-            );
+            return <Message message={message} />;
           })}
         </div>
         <form onSubmit={(e) => formSubmitHoGaya(e)}>
