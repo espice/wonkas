@@ -16,7 +16,6 @@ const message = require("@models/message");
 const user = require("@models/user");
 const server = require("http").createServer(app);
 
-const io = require("socket.io")(server);
 
 bcrypt.hash("mypassword", 15, function (err, hash) {});
 
