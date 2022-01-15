@@ -53,7 +53,7 @@ const SidebarLink = ({ linkId, text }) => {
   const router = useRouter();
   let isLinkActive = false;
 
-  if (router.pathname.includes(sidebarLinkData[linkId]["route"])) {
+  if (router.pathname == sidebarLinkData[linkId]["route"]) {
     isLinkActive = true;
   }
   return (
@@ -100,11 +100,9 @@ const Sidebar = (props) => {
     return (
       <>
         <div className={styles.sidebar__section}>
-          <Link href="/">
             <div className={styles["sidebar__logo-container"]}>
               <h1 className={styles.sidebar__heading}>Wonka's</h1>
             </div>
-          </Link>
         </div>
         <div className={styles["sidebar__section"]}></div>
         <div

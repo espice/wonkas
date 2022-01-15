@@ -28,7 +28,7 @@
 
 .sidebar {
   min-width: 300px;
-  width: 20vw;
+  width: 18vw;
   height: 100vh;
   position: sticky;
   top: 0;
@@ -61,7 +61,7 @@
     flex-direction: column;
 
     &--nav {
-      margin-top: 18vh;
+      margin-top: 16vh;
       align-items: flex-start;
       padding-left: 30px;
     }
@@ -108,10 +108,11 @@
     align-items: center;
     justify-content: center;
     width: 90%;
-    padding: 16px 8px;
+    padding: 18px 8px;
     border-radius: 6px;
     transition: 0.2s ease-in;
     text-decoration: none;
+    margin-top: 10px;
 
     &:not(:last-child) {
       margin-bottom: 5px;

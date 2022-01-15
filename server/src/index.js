@@ -7,11 +7,16 @@ const express = require("express");
 const cookieParser = require("cookie-parser");
 const mongoose = require("mongoose");
 const auth = require("@routes/auth");
+const tasks = require("@routes/tasks");
+const cart = require("@routes/api/cart");
+const products = require("@routes/products");
 const app = express();
 const bcrypt = require("bcrypt");
 const message = require("@models/message");
 const user = require("@models/user");
 const server = require("http").createServer(app);
+
+const io = require("socket.io")(server);
 
 bcrypt.hash("mypassword", 15, function (err, hash) {});
 
@@ -84,6 +89,9 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use("/auth", auth);
+app.use("/tasks", tasks);
+app.use("/api/cart", cart);
+app.use("/products", products);
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
