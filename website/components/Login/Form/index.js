@@ -8,7 +8,9 @@ import { signIn } from "next-auth/client";
 export default function LoginForm({ method, setOpen }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loggingIn, setLoggingIn] = useState(false);
   const submit = async (e) => {
+    setLoggingIn(true);
     e.preventDefault();
 
     const response = await axios.post("/auth/login", {
@@ -19,6 +21,8 @@ export default function LoginForm({ method, setOpen }) {
     if (response.data.success) {
       setOpen(false);
       Router.reload();
+    } else {
+      setLoggingIn(false);
     }
   };
   return (
@@ -32,13 +36,13 @@ export default function LoginForm({ method, setOpen }) {
 
       <div className={styles.popup__heading}>
         <h2>Login</h2>
-        <p>as {method == 0 ? "Oompa Loompa" : "Customer"}</p>
+        <p>as {method == 0 ? "Worker" : "Customer"}</p>
       </div>
       {method === 0 ? (
         <div className={styles.popup__form}>
           <form onSubmit={submit} className={styles.popup__form__main}>
             <TextField
-              label="Oompa Loompa ID"
+              label="Worker ID"
               type="email"
               borderColor="rgba(92, 0, 153, 0.7)"
               required
@@ -55,8 +59,13 @@ export default function LoginForm({ method, setOpen }) {
             />
             <input
               type="submit"
-              value="Login"
-              className={styles.popup__form__main__submit}
+              value={loggingIn ? "Logging in..." : "Login"}
+              className={
+                loggingIn
+                  ? styles.popup__form__main__submit__disabled
+                  : styles.popup__form__main__submit
+              }
+              disabled={loggingIn}
             />
           </form>
         </div>
