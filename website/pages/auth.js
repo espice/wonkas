@@ -1,9 +1,8 @@
 import { getSession } from "next-auth/client";
 import { useEffect } from "react";
 
-import Head from "next/head";
 import Loading from "../components/Loading";
-
+import Layout from "../components/Layout";
 import axios from "../config/axios";
 
 import Router from "next/router";
@@ -24,10 +23,7 @@ const Auth = () => {
   });
 
   return (
-    <>
-      <Head>
-        <title>Authenticating...</title>
-      </Head>
+    <Layout title="Authenticating...">
       <div
         style={{
           display: "flex",
@@ -39,7 +35,7 @@ const Auth = () => {
       >
         <Loading />
       </div>
-    </>
+    </Layout>
   );
 };
 

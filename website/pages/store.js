@@ -1,14 +1,12 @@
 import axios from "../config/axios";
 import Head from "next/head";
+import Layout from "../components/Layout";
 export default function Store() {
   return (
-    <>
-      <Head>
-        <title>Store</title>
-      </Head>
+    <Layout title="Store">
       <div>
-        <h1>Store</h1>
+        <h2>Store</h2>
       </div>
-    </>
+    </Layout>
   );
 }
