@@ -100,11 +100,9 @@ const Sidebar = (props) => {
     return (
       <>
         <div className={styles.sidebar__section}>
-          <Link href="/">
             <div className={styles["sidebar__logo-container"]}>
               <h1 className={styles.sidebar__heading}>Wonka's</h1>
             </div>
-          </Link>
         </div>
         <div className={styles["sidebar__section"]}></div>
         <div
