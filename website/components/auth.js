@@ -41,6 +41,9 @@ const Auth = ({ children }) => {
       Router.replace("/manager");
       setUser(user);
       setLoading(false);
+    } else {
+      setUser(user);
+      setLoading(false);
     }
   }, []);
 
