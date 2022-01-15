@@ -18,7 +18,7 @@ const Auth = () => {
         role: "customer",
       });
       console.log(res.data);
-      Router.redirect("/store");
+      Router.push("/store");
     });
   });
 

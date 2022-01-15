@@ -1,4 +1,5 @@
-import Head from "next/head"
+import Head from "next/head";
+import Auth from "../auth";
 
 const Layout = ({ children, title }) => {
   return (
@@ -15,7 +16,9 @@ const Layout = ({ children, title }) => {
         <meta name="theme-color" content="#0a6cff" />
         <title>{title}</title>
       </Head>
-      <div>{children}</div>
+      <Auth>
+        <div>{children}</div>
+      </Auth>
       <div id="popupContainer"></div>
     </div>
   );
