@@ -1,7 +1,6 @@
 import { getSession } from "next-auth/client";
 import { useEffect, useContext } from "react";
 
-import Head from "next/head";
 import Loading from "../components/Loading";
 import UserContext from "../components/userContext";
 import Layout from "../components/Layout";
@@ -31,7 +30,6 @@ const Auth = () => {
 
   return (
     <Layout title="Authenticating...">
-      {" "}
       <div
         style={{
           display: "flex",
