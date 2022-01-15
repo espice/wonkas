@@ -7,28 +7,15 @@ const express = require("express");
 const cookieParser = require("cookie-parser");
 const mongoose = require("mongoose");
 const auth = require("@routes/auth");
+const cart = require("@routes/api/cart");
 const app = express();
 const bcrypt = require("bcrypt");
 
 const server = require("http").createServer(app);
 
-const io = require("socket.io")(server, {
-  cors:{
-    origin:"http://localhost:3000",
-  }
-});
+const io = require("socket.io")(server);
 
-const userio = io.of("/chat")
-userio.on("connection", (socket) => {
-  socket.on("message", (message, location, id) => {
-    console.log("message aaya")
-    console.log(message, location)
-  })
-})
-
-bcrypt.hash("oompaloompa", 15, function (err, hash) {
-  console.log(hash)
-});
+bcrypt.hash("mypassword", 15, function (err, hash) {});
 
 mongoose
   .connect(process.env.MONGODB_URI, {
@@ -55,6 +42,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use("/auth", auth);
+app.use("/api/cart", cart);
 
 app.get("/", (req, res) => {
   res.send("Hello World!");

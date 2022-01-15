@@ -25,9 +25,10 @@ const userSchema = new mongoose.Schema(
       required: [true, "User type is missing"],
     },
     isManager: { type: Boolean, default: false },
-    tasks: { type: [{ description: String, completed: Boolean }], default: [] },
+    tasks: { type: Array, default: [] },
     notifs: { type: Array, default: [] },
-    location: { type: String, default: "Reception" },
+    location: { type: String, default: "" },
+    cart: { type: Array, default: [] },
   },
   { timestamps: true }
 );
