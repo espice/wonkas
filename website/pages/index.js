@@ -25,7 +25,7 @@ export default function App() {
   if (!session) {
     return (
       <Layout>
-        <SideNav></SideNav>
+        {/* <SideNav></SideNav> */}
         <br></br>
         <button
           style={{ "margin-left": "200px" }}

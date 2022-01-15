@@ -11,6 +11,7 @@ const Auth = ({ children }) => {
   useEffect(async () => {
     const res = await axios.get("/auth/me");
     console.log(Router.pathname);
+    console.log(res.data);
     const path = Router.pathname;
     const success = res.data.success;
     const user = res.data.user;
@@ -18,11 +19,7 @@ const Auth = ({ children }) => {
     if (res.data.success == false && (path != "/" || path != "/auth")) {
       Router.replace("/");
       setLoading(false);
-    } else if (
-      success &&
-      user.role == "customer" &&
-      !path.includes("store")
-    ) {
+    } else if (success && user.role == "customer" && !path.includes("store")) {
       Router.replace("/store");
       setUser(user);
       setLoading(false);

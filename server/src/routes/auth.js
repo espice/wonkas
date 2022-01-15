@@ -62,7 +62,8 @@ router.get("/me", auth, async (req, res) => {
   if (!req.user)
     return res.send({ success: false, message: "Invalid Session" });
 
-  const user = await User.findOne({ id: req.user._id });
+  const user = await User.findOne({ _id: req.user.id });
+  console.log(req.user.id);
   res.send({ success: true, user: user });
 });
 
