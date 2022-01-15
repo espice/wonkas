@@ -20,7 +20,7 @@ const Auth = ({ children }) => {
       setLoading(false);
     } else if (
       success &&
-      user.role[0] == "customer" &&
+      user.role == "customer" &&
       !path.includes("store")
     ) {
       Router.replace("/store");
@@ -28,7 +28,7 @@ const Auth = ({ children }) => {
       setLoading(false);
     } else if (
       success &&
-      user.role[0] == "oompaloompa" &&
+      user.role == "oompaloompa" &&
       !user.isManager &&
       !path.includes("oompaloompa")
     ) {
@@ -37,7 +37,7 @@ const Auth = ({ children }) => {
       setLoading(false);
     } else if (
       success &&
-      user.role[0] == "oompaloompa" &&
+      user.role == "oompaloompa" &&
       user.isManager &&
       !path.includes("manager")
     ) {

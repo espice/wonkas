@@ -2,6 +2,7 @@ const { Router } = require("express");
 const jwt = require("jsonwebtoken");
 const auth = require("@middleware/auth");
 const router = Router();
+const bcrypt = require("bcrypt");
 
 //models
 const User = require("@models/user");
@@ -34,6 +35,17 @@ router.post("/login", async (req, res) => {
     }
   }
   if (type == "oompaloompa") {
+    const dbUser = await User.findOne({ email: req.body.email });
+
+    if (!dbUser) {
+      return res.send({ success: false, message: "Invalid Credentials" });
+    }
+
+    const match = await bcrypt.compare(req.body.password, dbUser.password);
+
+    if (!match) {
+      return res.send({ success: false, message: "Invalid Credentials" });
+    }
   }
 
   return res.send({ success: "false", message: "Invalid Type" });

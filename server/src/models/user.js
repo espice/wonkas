@@ -20,7 +20,8 @@ const userSchema = new mongoose.Schema(
       default: "",
     },
     role: {
-      type: ["oompaloompa", "customer"],
+      type: String,
+      enum: ["oompaloompa", "customer"],
       required: [true, "User type is missing"],
     },
     isManager: { type: Boolean, default: false },
