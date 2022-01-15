@@ -1,5 +1,7 @@
 import Layout from "../../components/Layout";
 import Sidebar from "../../components/SideNav";
+import { FAB } from "../../components/Button";
+import PlusIcon from "../../public/icons/plus.svg";
 
 import styles from "../../styles/pages/manager/home.module.scss";
 import classNames from "classnames/bind";
@@ -14,13 +16,14 @@ const Manager = () => {
   return (
     <Layout>
       <Sidebar />
+      <FAB>
+        <PlusIcon />
+      </FAB>
       <div className={styles.main}>
         <h1 className={styles.main__heading}>
           Welcome, <span>{user.name}</span>
         </h1>
-        <h4 className={styles["main__sub-heading"]}>
-         Manage Oompa Loompas
-        </h4>
+        <h4 className={styles["main__sub-heading"]}>Manage Oompa Loompas</h4>
       </div>
     </Layout>
   );
