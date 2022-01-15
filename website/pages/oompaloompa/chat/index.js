@@ -72,16 +72,18 @@ const Chat = () => {
       <Sidebar />
       <div className={styles.main}>
         <h1 className={styles.main__heading}>Chat</h1>
-        {messages.map((message) => {
-          console.log(message);
-          return (
-            <div>
-              <h1>{message.message}</h1>
-              <h2>{message.author.name}</h2>
-              <img src={message.author.photoUrl} alt="" />
-            </div>
-          );
-        })}
+
+        <div className={styles.main__messages}>
+          {messages.map((message) => {
+            return (
+              <div>
+                <img src={message.author.photoUrl} alt="" />
+                <h1>{message.message}</h1>
+                <h2>{message.author.name}</h2>
+              </div>
+            );
+          })}
+        </div>
         <form onSubmit={(e) => formSubmitHoGaya(e)}>
           <input
             type="text"
@@ -89,6 +91,7 @@ const Chat = () => {
             value={message}
             onChange={(e) => setMessage(e.target.value)}
           />
+          <input type="submit" value="Send" />
         </form>
       </div>
     </Layout>
