@@ -1,10 +1,25 @@
 import styles from "./index.module.scss";
+import { useState } from "react";
+import axios from "../../../config/axios";
+import Router from "next/router";
 
 import TextField from "../../Form";
 import { signIn } from "next-auth/client";
 export default function LoginForm({ method, setOpen }) {
-  const submit = (e) => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const submit = async (e) => {
     e.preventDefault();
+
+    const response = await axios.post("/auth/login", {
+      email: email,
+      password: password,
+      role: "oompaloompa",
+    });
+    if (response.data.success) {
+      setOpen(false);
+      Router.reload();
+    }
   };
   return (
     <div className={styles.popup}>
@@ -26,11 +41,17 @@ export default function LoginForm({ method, setOpen }) {
               label="Oompa Loompa ID"
               type="email"
               borderColor="rgba(92, 0, 153, 0.7)"
+              required
+              onChange={(e) => setEmail(e.target.value)}
+              value={email}
             />
             <TextField
               label="Password"
               type="password"
               borderColor="rgba(92, 0, 153, 0.7)"
+              required
+              onChange={(e) => setPassword(e.target.value)}
+              value={password}
             />
             <input
               type="submit"
