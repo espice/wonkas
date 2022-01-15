@@ -11,6 +11,10 @@ const messageSchema = mongoose.Schema({
             type: mongoose.Types.ObjectId,
             required: [true, "Author is missing"],
           },
+    location: {
+            type: String,
+            required: [true, "Location is missing"],
+          },
     time: {
         type: Date,
         default: Date.now,
@@ -18,7 +22,7 @@ const messageSchema = mongoose.Schema({
     }
     
 })
-const Message = mongoose.model("Message", messageSchema);
+const Message = mongoose.model("Messages", messageSchema);
 
 module.exports = Message;
 
