@@ -5,11 +5,19 @@ import { config } from "@fortawesome/fontawesome-svg-core";
 config.autoAddCss = false;
 import { Provider } from "next-auth/client";
 
+import UserContext from "../components/userContext";
+import { useState } from "react";
+
 // Export Root
 export default function MyApp({ Component, pageProps }) {
+  const [user, setUser] = useState({});
+  const [loading, setLoading] = useState(true);
+
   return (
-    <Provider session={pageProps.session}>
-      <Component {...pageProps} />
-    </Provider>
+    <UserContext.Provider value={{ user, setUser, loading, setLoading }}>
+      <Provider session={pageProps.session}>
+        <Component {...pageProps} />
+      </Provider>
+    </UserContext.Provider>
   );
 }

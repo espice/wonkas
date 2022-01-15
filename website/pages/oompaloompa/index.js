@@ -1,5 +1,7 @@
+import Layout from "../../components/Layout";
+
 const OompaLoompa = () => {
-  return <div>Oompa Loompa</div>;
+  return <Layout>Oompa Loompa Page</Layout>;
 };
 
 export default OompaLoompa;

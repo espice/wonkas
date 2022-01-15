@@ -1,7 +1,13 @@
 import Head from "next/head";
 import Auth from "../auth";
+import UserContext from "../userContext";
+import Loading from "../Loading";
+
+import { useContext } from "react";
 
 const Layout = ({ children, title }) => {
+  const { loading } = useContext(UserContext);
+
   return (
     <div>
       <Head>
@@ -17,7 +23,21 @@ const Layout = ({ children, title }) => {
         <title>{title}</title>
       </Head>
       <Auth>
-        <div>{children}</div>
+        {loading ? (
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              height: "100vh",
+              backgroundColor: "#f9f9f9",
+            }}
+          >
+            <Loading />
+          </div>
+        ) : (
+          <div>{children}</div>
+        )}
       </Auth>
       <div id="popupContainer"></div>
     </div>

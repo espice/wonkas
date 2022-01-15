@@ -1,5 +1,7 @@
-const Manager = () => {
-    return <div></div>
-}
+import Layout from "../../components/Layout";
 
-export default Manager
+const Manager = () => {
+  return <Layout>Manager Page</Layout>;
+};
+
+export default Manager;

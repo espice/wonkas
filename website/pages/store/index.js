@@ -1,5 +1,5 @@
-const Store = () => {
-  return <div></div>;
-};
+import Layout from "../../components/Layout";
 
-export default Store;
+export default function Store() {
+  return <Layout title="Store">Store</Layout>;
+}

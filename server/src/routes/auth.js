@@ -11,17 +11,15 @@ router.post("/login", async (req, res) => {
   console.log(req.body);
 
   if (type == "customer") {
-    const user = {
-      email: req.body.email,
-      name: req.body.name,
-      photoUrl: req.body.photoUrl,
-      role: "customer",
-    };
-
-    const dbUser = await User.findOne({ email: user.email });
+    const dbUser = await User.findOne({ email: req.body.email });
 
     if (!dbUser) {
-      const newUser = await User.create(user);
+      const newUser = await new User({
+        email: req.body.email,
+        name: req.body.name,
+        photoUrl: req.body.photoUrl,
+        role: "customer",
+      }).save();
       const token = jwt.sign({ id: newUser._id }, process.env.JWT_KEY);
 
       return res

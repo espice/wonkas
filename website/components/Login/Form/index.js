@@ -22,8 +22,16 @@ export default function LoginForm({ method, setOpen }) {
       {method === 0 ? (
         <div className={styles.popup__form}>
           <form onSubmit={submit} className={styles.popup__form__main}>
-            <TextField label="Oompa Loompa ID" type="email" />
-            <TextField label="Password" type="password" />
+            <TextField
+              label="Oompa Loompa ID"
+              type="email"
+              borderColor="rgba(92, 0, 153, 0.7)"
+            />
+            <TextField
+              label="Password"
+              type="password"
+              borderColor="rgba(92, 0, 153, 0.7)"
+            />
             <input
               type="submit"
               value="Login"
