@@ -1,5 +1,5 @@
 .popup {
-  height: 100%;
+  height: 69vh;
   display: flex;
   flex-flow: column;
   gap: 20px;
@@ -31,7 +31,7 @@
   }
 
   &__form {
-    padding-top: 60px;
+    margin-top: auto;
 
     &__main {
       display: flex;
@@ -39,19 +39,18 @@
       gap: 20px;
 
       &__submit {
-        color: white;
+        color: rgba(92, 0, 153, 0.7);
         width: fit-content;
-        margin-left: auto;
-        padding: 12px 32px;
-        border-radius: 6px;
+        margin: auto;
+        font-weight: 800;
+        font-size: 1.15rem;
         border: none;
         outline: none;
-        background-color: var(--primary);
         cursor: pointer;
         transition: all 0.2s;
-
+        background-color: transparent;
         &:hover {
-          background-color: rgb(74, 4, 121);
+          color: rgba(92, 0, 153, 0.8);
         }
       }
     }

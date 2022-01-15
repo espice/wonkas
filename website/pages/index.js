@@ -1,5 +1,6 @@
 import { useSession, signOut } from "next-auth/client";
 import { useEffect, useState } from "react";
+import axios from "../config/axios";
 
 import Layout from "../components/Layout";
 import LoginChooser from "../components/Login/Chooser";
@@ -20,14 +21,18 @@ export default function App() {
     setLoginPopupMethod(null);
     setLoginPopupStep(0);
   });
+
   if (!session) {
     return (
       <Layout>
-        <SideNav>
-
-        </SideNav>
+        <SideNav></SideNav>
         <br></br>
-        <button style={{"margin-left":"200px"}}onClick={() => setPopupState(true)}>Get Started</button>
+        <button
+          style={{ "margin-left": "200px" }}
+          onClick={() => setPopupState(true)}
+        >
+          Get Started
+        </button>
         <Popup
           popupState={popupState}
           ref={popupRef}
@@ -45,13 +50,11 @@ export default function App() {
             <LoginForm method={loginPopupMethod} setOpen={setPopupState} />
           )}
         </Popup>
-
       </Layout>
     );
   } else {
     return (
       <>
-
         <img src={session.user.image} />
         <h2>{session.user.name}</h2>
         <p>{session.user.email}</p>

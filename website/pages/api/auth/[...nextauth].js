@@ -1,6 +1,6 @@
 import NextAuth from "next-auth";
 import Providers from "next-auth/providers";
-
+import axios from "../../../config/axios";
 export default NextAuth({
   // Configure one or more authentication providers
   providers: [
@@ -18,7 +18,15 @@ export default NextAuth({
       console.log(message);
     },
     async signIn(req, userAcc) {
-
+      /*
+      const response = await axios.post("/auth/login", {
+        email: req.email,
+        name: req.name,
+        photoUrl: req.image,
+        role: "customer",
+      });
+      return console.log(response.data);
+      */
     },
   },
   pages: {
