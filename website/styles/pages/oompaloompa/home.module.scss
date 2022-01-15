@@ -1,5 +1,93 @@
 .main {
-  background-color: red;
+  //   background-color: red;
+  background-color: #f9f9f9;
   height: 100vh;
   width: 100%;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-top: 50px;
+
+  &__heading {
+    color: var(--cool-grey-800);
+    font-weight: 600;
+    font-size: 30px;
+
+    & span {
+      font-weight: 700;
+    }
+  }
+
+  &__assigned {
+    color: #52606d;
+    font-weight: 500;
+    margin-top: 20px;
+    font-size: 20px;
+
+    & span {
+      font-weight: 700;
+    }
+  }
+
+  &__sub-heading {
+    color: var(--cool-grey-800);
+    font-size: 24px;
+    font-weight: 700;
+    margin-top: 30px;
+  }
+
+  &__sub-sub-heading {
+    font-weight: 600;
+    color: #616e7c;
+    margin-top: 12px;
+    font-size: 19px;
+    // margin-bottom: 15px;
+  }
+}
+
+.task-card {
+  width: 100%;
+  height: 90px;
+  background-color: #fff;
+  border-radius: 6px;
+  margin-top: 20px;
+  //   margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--cool-grey-800);
+
+  &:first-child {
+    margin-top: 25px;
+  }
+
+  &__button {
+    height: 50px;
+    padding-left: 20px;
+    padding-right: 20px;
+    outline: none;
+    box-shadow: none;
+    border: solid 4px var(--btn-color);
+    background-color: var(--btn-bg-color);
+    border-radius: 5px;
+    color: var(--btn-color);
+    font-size: 15px;
+    font-weight: 600;
+    width: 180px;
+
+    &--completed {
+      --btn-color: #e01a1a;
+      --btn-bg-color: rgba(224,26,26, 0.2);
+    }
+
+    &--not-completed{
+        --btn-color: #6ADB24;
+        --btn-bg-color: rgba(106,219,36, 0.2)
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
 }

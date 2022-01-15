@@ -13,6 +13,7 @@ const Auth = ({ children }) => {
     const path = Router.pathname;
     const success = res.data.success;
     const user = res.data.user;
+    setLoading(true);
 
     if (res.data.success == false && (path != "/" || path != "/auth")) {
       Router.replace("/");
