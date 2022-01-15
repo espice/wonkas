@@ -15,14 +15,12 @@ const Auth = () => {
   useEffect(() => {
     if (!loading) {
       getSession().then(async (session) => {
-        console.log(session);
         const res = await axios.post("/auth/login", {
           email: session.user.email,
           name: session.user.name,
           photoUrl: session.user.image,
           role: "customer",
         });
-        console.log(res.data);
         Router.push("/store");
       });
     }

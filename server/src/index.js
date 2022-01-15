@@ -14,10 +14,7 @@ const server = require("http").createServer(app);
 
 const io = require("socket.io")(server);
 
-bcrypt.hash("mypassword", 15, function(err, hash) {
-  // Store hash in your password DB.
-  console.log(hash)
-});
+bcrypt.hash("mypassword", 15, function (err, hash) {});
 
 mongoose
   .connect(process.env.MONGODB_URI, {

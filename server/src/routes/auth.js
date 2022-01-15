@@ -9,7 +9,6 @@ const User = require("@models/user");
 
 router.post("/login", async (req, res) => {
   const type = req.body.role;
-  console.log(req.body);
 
   if (type == "customer") {
     const dbUser = await User.findOne({ email: req.body.email });
@@ -58,12 +57,10 @@ router.post("/login", async (req, res) => {
 });
 
 router.get("/me", auth, async (req, res) => {
-  console.log("Hello World!");
   if (!req.user)
     return res.send({ success: false, message: "Invalid Session" });
 
-  const user = await User.findOne({ _id: req.user.id });
-  console.log(req.user.id);
+  const user = await User.findOne({ _id: req.user.id }).select("-password");
   res.send({ success: true, user: user });
 });
 
