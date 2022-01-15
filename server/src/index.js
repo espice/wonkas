@@ -9,6 +9,7 @@ const mongoose = require("mongoose");
 const auth = require("@routes/auth");
 const tasks = require("@routes/tasks");
 const cart = require("@routes/api/cart");
+const products = require("@routes/products");
 const app = express();
 const bcrypt = require("bcrypt");
 
@@ -45,6 +46,7 @@ app.use(cookieParser());
 app.use("/auth", auth);
 app.use("/tasks", tasks);
 app.use("/api/cart", cart);
+app.use("/products", products);
 
 app.get("/", (req, res) => {
   res.send("Hello World!");

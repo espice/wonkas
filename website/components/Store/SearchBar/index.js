@@ -1,19 +1,9 @@
-import axios from "../../../config/axios";
 import { useState, useEffect } from "react";
-export default function SearchBar({ setSearchResults }) {
+import styles from "./index.module.scss";
+export default function SearchBar({ productList, setSearchResults }) {
   const [searchTerm, setSearchTerm] = useState("");
-  const [searchLoading, setSearchLoading] = useState(false);
 
-  const search = async (term) => {
-    setSearchLoading(true);
-    const response = await axios.get("/api/search", {
-      query: { term },
-    });
-    if (response.data.success) {
-      setSearchResults(response.data.results);
-    }
-    setSearchLoading(false);
-  };
+  const search = async (term) => {};
 
   useEffect(() => {
     if (searchTerm == "") {
@@ -24,11 +14,12 @@ export default function SearchBar({ setSearchResults }) {
   }, [searchTerm]);
 
   return (
-    <div className="search-bar">
+    <div className={styles.searchbar}>
       <input
         placeholder="Search"
         value={searchTerm}
         onChange={(e) => setSearchTerm(e.target.value)}
+        className={styles.searchbar__input}
       />
     </div>
   );
