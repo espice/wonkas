@@ -60,7 +60,7 @@ router.get("/me", auth, async (req, res) => {
   if (!req.user)
     return res.send({ success: false, message: "Invalid Session" });
 
-  const user = await User.findOne({ _id: req.user.id }).select("-password");
+  const user = await User.findOne({ _id: req.user.id }).select("-password -tasks");
   res.send({ success: true, user: user });
 });
 

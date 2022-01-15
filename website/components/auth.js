@@ -15,13 +15,16 @@ const Auth = ({ children }) => {
     const user = res.data.user;
     setLoading(true);
 
+    console.log(path);
+
     if (res.data.success == false && (path != "/" || path != "/auth")) {
+      console.log("here2");
       Router.replace("/");
       setLoading(false);
     } else if (success && user.role == "customer" && !path.includes("store")) {
       Router.replace("/store");
-      setUser(user);
-      setLoading(false);
+      //   setUser(user);
+      //   setLoading(false);
     } else if (
       success &&
       user.role == "oompaloompa" &&
@@ -29,8 +32,8 @@ const Auth = ({ children }) => {
       !path.includes("oompaloompa")
     ) {
       Router.replace("/oompaloompa");
-      setUser(user);
-      setLoading(false);
+      //   setUser(user);
+      //   setLoading(false);
     } else if (
       success &&
       user.role == "oompaloompa" &&
@@ -38,9 +41,10 @@ const Auth = ({ children }) => {
       !path.includes("manager")
     ) {
       Router.replace("/manager");
-      setUser(user);
-      setLoading(false);
+      //   setUser(user);
+      //   setLoading(false);
     } else {
+      console.log("here");
       setUser(user);
       setLoading(false);
     }
