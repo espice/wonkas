@@ -1,6 +1,7 @@
 import { getSession } from "next-auth/client";
 import { useEffect } from "react";
 
+import Head from "next/head";
 import Loading from "../components/Loading";
 
 import axios from "../config/axios";
@@ -23,17 +24,22 @@ const Auth = () => {
   });
 
   return (
-    <div
-      style={{
-        display: "flex",
-        justifyContent: "center",
-        alignItems: "center",
-        height: "100vh",
-        backgroundColor: "#f9f9f9",
-      }}
-    >
-      <Loading />
-    </div>
+    <>
+      <Head>
+        <title>Authenticating...</title>
+      </Head>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          height: "100vh",
+          backgroundColor: "#f9f9f9",
+        }}
+      >
+        <Loading />
+      </div>
+    </>
   );
 };
 
