@@ -53,7 +53,7 @@ const SidebarLink = ({ linkId, text }) => {
   const router = useRouter();
   let isLinkActive = false;
 
-  if (router.pathname.includes(sidebarLinkData[linkId]["route"])) {
+  if (router.pathname == sidebarLinkData[linkId]["route"]) {
     isLinkActive = true;
   }
   return (
