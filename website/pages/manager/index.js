@@ -18,9 +18,7 @@ const Manager = () => {
         <h1 className={styles.main__heading}>
           Welcome, <span>{user.name}</span>
         </h1>
-        <h4 className={styles["main__sub-heading"]}>
-         Manage Oompa Loompas
-        </h4>
+        <h4 className={styles["main__sub-heading"]}>Manage Oompa Loompas</h4>
       </div>
     </Layout>
   );
