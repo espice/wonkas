@@ -12,7 +12,19 @@ const bcrypt = require("bcrypt");
 
 const server = require("http").createServer(app);
 
-const io = require("socket.io")(server);
+const io = require("socket.io")(server, {
+  cors:{
+    origin:"http://localhost:3000",
+  }
+});
+
+const userio = io.of("/chat")
+userio.on("connection", (socket) => {
+  socket.on("message", (message, location, id) => {
+    console.log("message aaya")
+    console.log(message, location)
+  })
+})
 
 bcrypt.hash("mypassword", 15, function (err, hash) {});
 
