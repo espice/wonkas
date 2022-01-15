@@ -69,7 +69,6 @@ export default function LoginForm({ method, setOpen }) {
                 await signIn("google", {
                   callbackUrl: "http://localhost:3000/auth",
                 });
-                console.log("hello world");
               }}
             >
               <p>Sign in with Google</p>

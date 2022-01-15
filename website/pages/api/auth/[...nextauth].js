@@ -17,17 +17,7 @@ export default NextAuth({
     async error(message) {
       console.log(message);
     },
-    async signIn(req, userAcc) {
-      /*
-      const response = await axios.post("/auth/login", {
-        email: req.email,
-        name: req.name,
-        photoUrl: req.image,
-        role: "customer",
-      });
-      return console.log(response.data);
-      */
-    },
+    async signIn(req, userAcc) {},
   },
   pages: {
     signIn: "/",

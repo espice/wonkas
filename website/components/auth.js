@@ -10,8 +10,6 @@ const Auth = ({ children }) => {
 
   useEffect(async () => {
     const res = await axios.get("/auth/me");
-    console.log(Router.pathname);
-    console.log(res.data);
     const path = Router.pathname;
     const success = res.data.success;
     const user = res.data.user;
