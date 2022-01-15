@@ -46,6 +46,12 @@ router.post("/login", async (req, res) => {
     if (!match) {
       return res.send({ success: false, message: "Invalid Credentials" });
     }
+
+    const token = jwt.sign({ id: dbUser._id }, process.env.JWT_KEY);
+
+    return res
+      .cookie("token", token, { httpOnly: true, maxAge: 15552000000 })
+      .send({ success: true, user: dbUser });
   }
 
   return res.send({ success: "false", message: "Invalid Type" });

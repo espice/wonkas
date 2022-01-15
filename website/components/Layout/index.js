@@ -36,7 +36,7 @@ const Layout = ({ children, title }) => {
             <Loading />
           </div>
         ) : (
-          <div>{children}</div>
+          <div style={{ display: "flex" }}>{children}</div>
         )}
       </Auth>
       <div id="popupContainer"></div>

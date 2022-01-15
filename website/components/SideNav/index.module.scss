@@ -1,15 +1,14 @@
-
 .sidebar {
   position: fixed;
-  width: 250px;
+  width: var(--sidebar-width);
   height: 100%;
-  background: #5C0099;
+  background: #5c0099;
   transition: all 0.5s ease;
 }
 
 .sidebar header {
   font-size: 22px;
-  color: #FDC500;
+  color: #fdc500;
   line-height: 140px;
   text-align: center;
   user-select: none;
@@ -27,20 +26,18 @@
   transition: 0.4s;
   text-align: left;
   text-decoration: none;
-  
 }
 
 .ul li:hover a {
-  background-color: rgba(92,0,153, 0.1);
+  background-color: rgba(92, 0, 153, 0.1);
 }
 .ul li a > * {
-    line-height: 200px;
-    padding-right:6%;
-    padding-top:15px;
-    font-size:36px;
+  line-height: 200px;
+  padding-right: 6%;
+  padding-top: 15px;
+  font-size: 36px;
 }
 
 .sidebar ul a i {
   margin-right: 20px;
 }
-
