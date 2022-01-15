@@ -24,7 +24,7 @@ router.post("/", auth, async (req, res) => {
   }
 
   const user = await User.findOne({ _id: req.user.id });
-  if (user.role !== "customer") {
+  if (user.role !== "manager") {
     return res.send({ success: false, message: "Malformed Request" });
   }
 

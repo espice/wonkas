@@ -1,41 +1,90 @@
 .main {
-    //   background-color: red;
-    background-color: #f9f9f9;
-    height: 100vh;
-    width: 100%;
-    padding-left: 40px;
-    padding-right: 40px;
-    padding-top: 50px;
-    padding-bottom: 50px;
-    display: flex;
-    flex-direction: column;
-    overflow-y: scroll;
-    overflow-x: hidden;
-  
-    &__heading {
-      color: var(--cool-grey-800);
-      font-weight: 600;
-      font-size: 30px;
-  
-      & span {
-        font-weight: 700;
-      }
-    }
-  
+  //   background-color: red;
+  background-color: #f9f9f9;
+  height: 100vh;
+  width: 100%;
+  padding-left: 40px;
+  padding-right: 40px;
+  padding-top: 50px;
+  padding-bottom: 50px;
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  overflow-x: hidden;
 
-  
-    &__sub-heading {
-      color: #52606D;
-      font-size: 22px;
-      font-weight: 600;
-      margin-top: 28px;
-    }
-  
-    &__sub-sub-heading {
-      font-weight: 600;
-      color: #616e7c;
-      margin-top: 12px;
-      font-size: 19px;
-      // margin-bottom: 15px;
+  &__heading {
+    color: var(--cool-grey-800);
+    font-weight: 600;
+    font-size: 30px;
+
+    & span {
+      font-weight: 700;
     }
   }
+
+  &__sub-heading {
+    color: #52606d;
+    font-size: 22px;
+    font-weight: 600;
+    margin-top: 28px;
+  }
+
+  &__sub-sub-heading {
+    font-weight: 600;
+    color: #616e7c;
+    margin-top: 12px;
+    font-size: 19px;
+    // margin-bottom: 15px;
+  }
+
+  &__productList {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    gap: 50px;
+    margin-top: 30px;
+
+    &__productCard {
+      background-color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: start;
+      justify-content: center;
+      padding: 20px;
+
+      & img {
+        width: 200px;
+      }
+
+      & h1 {
+        color: #323f4b;
+        font-size: 20px;
+      }
+
+      & div {
+        color: #696969;
+        font-weight: 600;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        margin: 12px 0;
+
+        & span {
+          color: #323f4b;
+        }
+      }
+
+      & button {
+        align-self: flex-end;
+        color: #e01a1a;
+        font-weight: 600;
+        border: 4px solid #e01a1a;
+        background-color: rgba(#e01a1a, 20%);
+        padding: 7px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+    }
+  }
+}

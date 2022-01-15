@@ -36,8 +36,7 @@ const Auth = () => {
           height: "100vh",
           width: "100vw",
           backgroundColor: "#f9f9f9",
-        }}
-      >
+        }}>
         <Loading />
       </div>
     </Layout>

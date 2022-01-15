@@ -49,8 +49,22 @@
         cursor: pointer;
         transition: all 0.2s;
         background-color: transparent;
+
         &:hover {
           color: rgba(92, 0, 153, 0.8);
+        }
+
+        &__disabled {
+          color: rgba(92, 0, 153, 0.5);
+
+          width: fit-content;
+          margin: auto;
+          font-weight: 800;
+          font-size: 1.15rem;
+          border: none;
+          outline: none;
+          transition: all 0.2s;
+          background-color: transparent;
         }
       }
     }
