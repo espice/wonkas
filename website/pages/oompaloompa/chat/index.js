@@ -16,6 +16,14 @@ const Chat = () => {
   const [socket, setSocket] = useState(null);
   const scrollRef = useRef(null);
 
+  useEffect(() => {
+    //disconnect socket when the component unmounts
+    if (!socket) return;
+    return () => {
+      console.log("disconnecting socket");
+      socket.disconnect();
+    };
+  }, []);
   useEffect(async () => {
     if (Object.keys(user).length !== 0) {
       const messages = await axios.get(`/api/messages/${user.location}`);
@@ -37,7 +45,7 @@ const Chat = () => {
   useEffect(() => {
     if (socket) {
       socket.on("message", ({ message, author }) => {
-        console.log(message, author);
+        console.log(message);
         setMessages((messages) => {
           return [
             ...messages,
@@ -47,7 +55,6 @@ const Chat = () => {
             },
           ];
         });
-        scrollRef.current.scrollIntoView({ behavior: "smooth" });
       });
     }
   }, [socket]);
@@ -56,16 +63,29 @@ const Chat = () => {
   const newMsg = (e) => {
     e.preventDefault();
     socket.emit("new-message", { body: message });
+
+    setMessages((messages) => {
+      return [
+        ...messages,
+        {
+          message: message,
+          author: user,
+        },
+      ];
+    });
     setMessage("");
-    scrollRef.current.scrollIntoView({ behavior: "smooth" });
   };
+
+  useEffect(() => {
+    scrollRef.current.scrollIntoView({ behavior: "smooth" });
+  }, [messages]);
   return (
     <Layout>
       <Sidebar />
       <div className={styles.main}>
         <h1 className={styles.main__heading}>Chat</h1>
         <p>For {user.location} workers</p>
-        <br/>
+        <br />
         <div className={styles.main__messages}>
           {messages.map((message) => {
             return (
