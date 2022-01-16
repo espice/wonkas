@@ -57,7 +57,8 @@ const Manager = () => {
       <div className={styles["popup"]}>
         <button
           className={styles["close-button"]}
-          onClick={() => setPopupOpen(false)}>
+          onClick={() => setPopupOpen(false)}
+        >
           <PlusIcon className={styles["close-button__icon"]} />
         </button>
         <h1 className={styles.main__heading} style={{ marginTop: "20px" }}>
@@ -68,7 +69,8 @@ const Manager = () => {
           onSubmit={(e) => {
             e.preventDefault();
             onAddLoompa(name, email, password);
-          }}>
+          }}
+        >
           <input
             className={styles["popup__input"]}
             placeholder="Name"
@@ -98,7 +100,8 @@ const Manager = () => {
             <button
               className="button-primary"
               type="submit"
-              style={{ width: "120px" }}>
+              style={{ width: "120px" }}
+            >
               {addLoading ? "Adding.." : "Add"}
             </button>
           </div>
@@ -108,8 +111,16 @@ const Manager = () => {
   };
 
   const OompaCard = ({ oompa }) => {
-    const { name, email } = oompa;
+    const { name, email, isManager, _id } = oompa;
     const [open, setOpen] = useState(false);
+    const [manager, setManager] = useState(isManager);
+    const [deleteLoading, setDeleteLoading] = useState(false);
+
+    async function updateManagerState() {
+      setManager(!manager);
+      await axios.put(`/oompaloompas/manager/${_id}`);
+    }
+
     return (
       <div
         className={cx(styles["oompa-card"], {
@@ -142,6 +153,8 @@ const Manager = () => {
               type="checkbox"
               // checked={checked}
               // onChange={e => onchange(e)}
+              checked={manager}
+              onChange={updateManagerState}
               className={cx(styles["form__toggle"])}
               // {...otherProps}
             />
@@ -159,8 +172,17 @@ const Manager = () => {
             <button className="button-primary" style={{ marginLeft: "12px" }}>
               View Tasks
             </button>
-            <button className="button-red" style={{ marginLeft: "12px" }}>
-              Remove
+            <button
+              className="button-red"
+              style={{ marginLeft: "12px" }}
+              onClick={async () => {
+                setDeleteLoading(true);
+                await axios.delete(`/oompaloompas/${_id}`);
+                setReload(!reload);
+                setDeleteLoading(false);
+              }}
+            >
+              {deleteLoading ? "Removing.." : "Remove"}
             </button>
           </div>
         </div>
@@ -186,13 +208,18 @@ const Manager = () => {
               flexGrow: 1,
               justifyContent: "center",
               alignItems: "center",
-            }}>
+            }}
+          >
             <Loading />
           </div>
         ) : (
           <div className={styles["main__card-container"]}>
             {oompas.map((oompa) => {
-              return <OompaCard oompa={oompa} />;
+              if (user._id != oompa._id) {
+                return <OompaCard oompa={oompa} />;
+              } else {
+                return <></>;
+              }
             })}
           </div>
         )}
