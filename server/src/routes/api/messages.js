@@ -22,4 +22,19 @@ router.get("/:location", auth, async (req, res) => {
   return res.send({ success: true, messages: messages });
 });
 
+router.get("/messages/:location", auth, async (req, res) => {
+  const userId = req.user.id;
+  const userObj = await user.findOne({ _id: userId });
+
+  if (!req.user) {
+    return res.send({ success: false, message: "Unauthorized" });
+  }
+
+  const messages = message.find({ location: req.params.location });
+  return res.send({
+    success: true,
+    messageCount: messages.length,
+    location: req.params.location,
+  });
+});
 module.exports = router;

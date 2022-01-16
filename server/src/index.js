@@ -17,6 +17,7 @@ const bcrypt = require("bcrypt");
 const message = require("@models/message");
 const user = require("@models/user");
 const server = require("http").createServer(app);
+const locations = require("@routes/api/locations");
 
 bcrypt.hash("mypassword", 15, function (err, hash) {});
 
@@ -63,7 +64,7 @@ chat.on("connection", async (socket) => {
 
     socket
       .to(location)
-      .emit("message", { message: newMessage.message, author: author });;
+      .emit("message", { message: newMessage.message, author: author });
   });
 });
 
@@ -87,6 +88,7 @@ app.use("/api/cart", cart);
 app.use("/products", products);
 app.use("/api/messages", messages);
 app.use("/oompaloompas", oompaloompas);
+app.use("/api/locations", locations);
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
