@@ -9,6 +9,7 @@ export default function Cart({ cartItems }) {
 
         <div className={styles.container__content}>
           {cartItems.map((item) => {
+            console.log("hi")
             return (
               <div>
                 <div className={styles.container__content__item}>
