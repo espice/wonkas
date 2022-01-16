@@ -1,71 +1,63 @@
 import React, { useEffect } from "react";
-import socket from "socket.io-client";
+import io from "socket.io-client";
 import Layout from "../../../components/Layout";
 import UserContext from "../../../components/userContext";
 import Message from "../../../components/Chat/Message";
-import { useContext, useState } from "react";
+import { useContext, useState, useRef } from "react";
+import axios from "../../../config/axios";
 
 import Sidebar from "../../../components/SideNav";
 import styles from "./index.module.scss";
 
 const Chat = () => {
   const { user } = useContext(UserContext);
-  const [location, setLocation] = useState(undefined);
   const [message, setMessage] = useState("");
-  const [id, setId] = useState("");
-  const [locationsetted, setLocationsetted] = useState(false);
   const [messages, setMessages] = useState([]);
-  const [io, setIo] = useState(null);
-  const [ioTrue, setIoTrue] = useState(false);
-  const [author, setAuthor] = useState({});
-  useEffect(() => {
-    setLocation(user.location);
-    setId(user._id);
-    setAuthor(user);
+  const [socket, setSocket] = useState(null);
+  const scrollRef = useRef(null);
 
-    console.log(id);
-    console.log(user);
-    if (location !== undefined) {
-      console.log("okbr");
-      console.log(location);
-      setLocationsetted(true);
-      io.emit("join", { location });
-      console.log("okhi");
-      io.on("connect-message", (data) => {
-        console.log(data);
-        setMessages(data);
+  useEffect(async () => {
+    if (Object.keys(user).length !== 0) {
+      const messages = await axios.get(`/api/messages/${user.location}`);
+      setMessages(messages.data.messages);
+
+      const socket = io("http://localhost:4000/chat", {
+        auth: {
+          id: user._id,
+        },
+        query: {
+          location: user.location,
+        },
       });
+
+      setSocket(socket);
     }
   }, [user]);
-  useEffect(() => {
-    console.log("ok");
-    setIo(socket("http://localhost:4000/chat"));
-    setIoTrue(true);
-  }, []);
 
   useEffect(() => {
-    if (ioTrue) {
-      io.on("server-message", (name, authorId, location) => {
-        console.log(authorId);
-        setMessages((prevmessages) => {
+    if (socket) {
+      socket.on("message", ({ message, author }) => {
+        console.log(message, author);
+        setMessages((messages) => {
           return [
-            ...prevmessages,
+            ...messages,
             {
-              message: name,
-              author: authorId[0],
-              location: location,
+              message: message,
+              author: author,
             },
           ];
         });
+        scrollRef.current.scrollIntoView({ behavior: "smooth" });
       });
     }
-  }, [io]);
+  }, [socket]);
 
   //const location = user.location;
-  const formSubmitHoGaya = (e) => {
+  const newMsg = (e) => {
     e.preventDefault();
-    io.emit("message", { messagename: message, id: id, location: location });
-    console.log(message, location);
+    socket.emit("new-message", { body: message });
+    setMessage("");
+    scrollRef.current.scrollIntoView({ behavior: "smooth" });
   };
   return (
     <Layout>
@@ -75,17 +67,40 @@ const Chat = () => {
         <p>For {user.location} workers</p>
         <div className={styles.main__messages}>
           {messages.map((message) => {
-            return <Message message={message} />;
+            return (
+              <Message message={message.message} author={message.author} />
+            );
           })}
+
+          <div ref={scrollRef}></div>
         </div>
-        <form onSubmit={(e) => formSubmitHoGaya(e)}>
+        <form onSubmit={(e) => newMsg(e)} className={styles.main__form}>
           <input
             type="text"
-            placeholder="Enter your message"
+            placeholder="Talk about tasks, payments, or anything else"
             value={message}
             onChange={(e) => setMessage(e.target.value)}
+            className={styles.main__form__input}
           />
-          <input type="submit" value="Send" />
+          <button
+            onClick={(e) => {
+              newMsg(e);
+            }}
+            className={styles.main__form__submit}
+          >
+            <svg
+              width="28"
+              height="28"
+              viewBox="0 0 32 32"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M2.6665 28L30.6665 16L2.6665 4V13.3333L22.6665 16L2.6665 18.6667V28Z"
+                fill="#616E7C"
+              />
+            </svg>
+          </button>
         </form>
       </div>
     </Layout>

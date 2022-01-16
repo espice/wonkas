@@ -57,8 +57,7 @@ const Manager = () => {
       <div className={styles["popup"]}>
         <button
           className={styles["close-button"]}
-          onClick={() => setPopupOpen(false)}
-        >
+          onClick={() => setPopupOpen(false)}>
           <PlusIcon className={styles["close-button__icon"]} />
         </button>
         <h1 className={styles.main__heading} style={{ marginTop: "20px" }}>
@@ -69,8 +68,7 @@ const Manager = () => {
           onSubmit={(e) => {
             e.preventDefault();
             onAddLoompa(name, email, password);
-          }}
-        >
+          }}>
           <input
             className={styles["popup__input"]}
             placeholder="Name"
@@ -100,8 +98,7 @@ const Manager = () => {
             <button
               className="button-primary"
               type="submit"
-              style={{ width: "120px" }}
-            >
+              style={{ width: "120px" }}>
               {addLoading ? "Adding.." : "Add"}
             </button>
           </div>
@@ -189,8 +186,7 @@ const Manager = () => {
               flexGrow: 1,
               justifyContent: "center",
               alignItems: "center",
-            }}
-          >
+            }}>
             <Loading />
           </div>
         ) : (
