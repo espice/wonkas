@@ -133,6 +133,40 @@ const Manager = () => {
             />
           </button>
         </div>
+        <div
+          className={cx(styles["oompa-card__open-container"], {
+            [styles["oompa-card__open-container--visible"]]: open,
+          })}
+        >
+          <div className={styles["oompa-card__stat-container"]}>
+            <p>Manager</p>
+            <div style={{ flexGrow: 1 }}></div>
+            <input
+              type="checkbox"
+              // checked={checked}
+              // onChange={e => onchange(e)}
+              className={cx(styles["form__toggle"])}
+              // {...otherProps}
+            />
+          </div>
+
+          <div className={styles["oompa-card__stat-container"]}>
+            <p>Assigned To</p>
+            <div style={{ flexGrow: 1 }}></div>
+            {oompa.location}
+          </div>
+          <div className={styles["oompa-card__action-btn-container"]}>
+            <button className="button-primary" style={{ marginLeft: "12px" }}>
+              Change Password
+            </button>
+            <button className="button-primary" style={{ marginLeft: "12px" }}>
+              View Tasks
+            </button>
+            <button className="button-red" style={{ marginLeft: "12px" }}>
+              Remove
+            </button>
+          </div>
+        </div>
       </div>
     );
   };
