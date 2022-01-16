@@ -17,6 +17,7 @@ const bcrypt = require("bcrypt");
 const message = require("@models/message");
 const user = require("@models/user");
 const server = require("http").createServer(app);
+const paycheck = require("@routes/paycheck");
 
 bcrypt.hash("mypassword", 15, function (err, hash) {});
 
@@ -87,6 +88,7 @@ app.use("/api/cart", cart);
 app.use("/products", products);
 app.use("/api/messages", messages);
 app.use("/oompaloompas", oompaloompas);
+app.use("/paycheck", paycheck)
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
