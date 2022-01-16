@@ -46,6 +46,7 @@ router.get("/products", auth, async (req, res) => {
     model: "Product"
   })
   console.log(populated_messages.cart)
+  console.log(typeof(populated_messages.cart[0]))
   return res.send({ success: true, cart: populated_messages.cart });
 })
 
