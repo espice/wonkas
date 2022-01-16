@@ -23,4 +23,36 @@
     gap: 10px;
     overflow-y: auto;
   }
+
+  &__form {
+    width: 100%;
+    display: flex;
+
+    &__input {
+      width: 95%;
+      background: transparent;
+      border: none;
+      outline: none;
+      padding: 20px;
+      color: #616e7c;
+
+      font-size: 18px;
+
+      &::placeholder {
+        color: #616e7c;
+        font-weight: 400;
+        font-size: 18px;
+      }
+    }
+    &__submit {
+      width: 5%;
+      background: transparent;
+      border: none;
+      outline: none;
+      padding: 20px;
+      color: #616e7c;
+      font-size: 18px;
+      cursor: pointer;
+    }
+  }
 }
