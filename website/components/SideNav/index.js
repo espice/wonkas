@@ -37,6 +37,10 @@ const SidebarLink = ({ linkId, text }) => {
       route: "/manager",
       icon: <HomeIcon className={styles["sidebar__icon"]} />,
     },
+    managerchat: {
+      route: "/manager/chat",
+      icon: <ChatIcon className={styles["sidebar__icon"]} />,
+    },
     manageritems: {
       route: "/manager/items",
       icon: <CartIcon className={styles["sidebar__icon"]} />,
@@ -84,6 +88,7 @@ const Sidebar = (props) => {
       return user.isManager ? (
         <>
           <SidebarLink linkId="managerhome" text="Home" />
+          <SidebarLink linkId="managerchat" text="Chat" />
           <SidebarLink linkId="manageritems" text="Items" />
           <SidebarLink linkId="managerpayments" text="Payments" />
           <SidebarLink linkId="managerprofile" text="Profile" />
@@ -100,9 +105,9 @@ const Sidebar = (props) => {
     return (
       <>
         <div className={styles.sidebar__section}>
-            <div className={styles["sidebar__logo-container"]}>
-              <h1 className={styles.sidebar__heading}>Wonka's</h1>
-            </div>
+          <div className={styles["sidebar__logo-container"]}>
+            <h1 className={styles.sidebar__heading}>Wonka's</h1>
+          </div>
         </div>
         <div className={styles["sidebar__section"]}></div>
         <div
