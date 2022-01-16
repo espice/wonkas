@@ -84,6 +84,7 @@ app.use("/tasks", tasks);
 app.use("/api/cart", cart);
 app.use("/products", products);
 app.use("/api/messages", messages);
+app.use("/oompaloompas", oompaloompas)
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
