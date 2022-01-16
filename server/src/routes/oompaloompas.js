@@ -29,4 +29,21 @@ router.post("/", auth, managerOnly, async (req, res) => {
   res.send({ success: true });
 });
 
+router.put("/manager/:userid", auth, managerOnly, async (req, res) => {
+  const user = await User.findById(req.params.userid);
+
+  const updatedUser = await User.findOneAndUpdate(
+    { _id: req.params.userid },
+    { isManager: !user.isManager }
+  );
+
+  res.send({ success: true });
+});
+
+router.delete("/:userid", auth, managerOnly, async (req, res) => {
+  await User.deleteOne({ _id: req.params.userid });
+
+  res.send({ success: true });
+});
+
 module.exports = router;

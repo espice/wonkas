@@ -31,8 +31,8 @@ export default function ManagerChat() {
         </div>
 
         <div className={styles.main__content}>
-          {locations.map((location) => {
-            return <LocationChatCard location={location} />;
+          {locations.map((location, index) => {
+            return <LocationChatCard location={location} key={index} />;
           })}
         </div>
       </div>
