@@ -114,6 +114,10 @@
     text-decoration: none;
     margin-top: 10px;
 
+    &__div {
+      width: 100%;
+      cursor: pointer;
+    }
     &:not(:last-child) {
       margin-bottom: 5px;
     }

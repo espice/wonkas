@@ -45,7 +45,6 @@ const Chat = () => {
   useEffect(() => {
     if (socket) {
       socket.on("message", ({ message, author }) => {
-        console.log(message);
         setMessages((messages) => {
           return [
             ...messages,
@@ -85,9 +84,15 @@ const Chat = () => {
     <Layout>
       <Sidebar />
       <div className={styles.main}>
-        <h1 className={styles.main__heading}>Chat</h1>
-        <p>For {user.location} workers</p>
-        <br />
+        <div className={styles.main__header}>
+          <div className={styles.main__header__title}>
+            <h1 className={styles.main__header__title__heading}>Chat</h1>
+            <p className={styles.main__header__title__description}>
+              for <b>{user.location}</b> workers
+            </p>
+          </div>
+        </div>
+
         <div className={styles.main__messages}>
           {messages.map((message) => {
             return (
@@ -104,9 +109,12 @@ const Chat = () => {
             value={message}
             onChange={(e) => setMessage(e.target.value)}
             className={styles.main__form__input}
+            required
           />
           <button
             onClick={(e) => {
+              if (message.length === 0) return;
+
               newMsg(e);
             }}
             className={styles.main__form__submit}
