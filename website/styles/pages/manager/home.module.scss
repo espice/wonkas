@@ -12,6 +12,10 @@
   overflow-y: scroll;
   overflow-x: hidden;
 
+  &__card-container {
+    margin-top: 40px;
+  }
+
   &__heading {
     color: var(--cool-grey-800);
     font-weight: 600;
@@ -89,33 +93,33 @@
   }
 }
 
-.close-button{
+.close-button {
   border: none;
   background-color: #f9f9f9;
 
-  &__icon{
+  &__icon {
     transform: scale(1.5) rotate(45deg);
     color: var(--primary);
     cursor: pointer;
   }
 }
 
-.popup{
-  &__form{
+.popup {
+  &__form {
     margin-top: 30px;
 
-    &__submit-group{
+    &__submit-group {
       display: flex;
       align-items: flex-end;
       justify-content: flex-end;
       margin-top: 40px;
     }
 
-    &__id-input{
+    &__id-input {
       display: flex;
       align-items: center;
 
-      & p{
+      & p {
         margin-bottom: 16px;
         margin-left: 12px;
         color: var(--cool-grey-800);
@@ -125,11 +129,11 @@
     }
   }
 
-  &__input{
+  &__input {
     width: 100%;
     height: 65px;
     border-radius: 6px;
-    border: solid 4px #E4E7EB;
+    border: solid 4px #e4e7eb;
     padding-left: 14px;
     padding-right: 14px;
     font-size: 17px;
@@ -139,8 +143,64 @@
     color: var(--cool-grey-800);
     margin-bottom: 16px;
 
-    &:focus{
+    &:focus {
       border-color: var(--primary);
+    }
+  }
+}
+
+.oompa-card {
+  width: 100%;
+  background-color: #fff;
+  margin-top: 20px;
+  border-radius: 6px;
+  display: flex;
+  padding: 0 20px;
+  flex-direction: column;
+  transition: all 0.3s ease-out;
+
+  &--closed {
+    height: 90px;
+  }
+
+  &--open{
+    height: 200px;
+  }
+
+  &__closed-container {
+    height: 90px;
+    width: 100%;
+    // background-color: red;
+    display: flex;
+    align-items: center;
+  }
+
+  &__name {
+    color: #3e4c59;
+    font-size: 19px;
+    font-weight: 700;
+  }
+
+  &__email {
+    font-size: 16px;
+    font-weight: 600;
+    color: #8c8c8c;
+    margin-left: 12px;
+  }
+
+  &__open-button {
+    color: var(--cool-grey-800);
+    margin-right: 12px;
+    cursor: pointer;
+    scale: 1.2;
+    transition: all 0.3s ease-out;
+
+    &--closed{
+      transform: rotate(0);
+    }
+
+    &--open{
+      transform: rotate(180deg);
     }
   }
 }

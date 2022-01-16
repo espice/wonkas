@@ -2,6 +2,7 @@ import Layout from "../../components/Layout";
 import Sidebar from "../../components/SideNav";
 import { FAB } from "../../components/Button";
 import PlusIcon from "../../public/icons/plus.svg";
+import ChevronDown from "../../public/icons/chevron_down.svg";
 import { Popup, useOnClickOutside } from "../../components/Popup";
 import Loading from "../../components/Loading";
 
@@ -109,6 +110,33 @@ const Manager = () => {
     );
   };
 
+  const OompaCard = ({ oompa }) => {
+    const { name, email } = oompa;
+    const [open, setOpen] = useState(false);
+    return (
+      <div
+        className={cx(styles["oompa-card"], {
+          [styles["oompa-card--closed"]]: !open,
+          [styles["oompa-card--open"]]: open,
+        })}
+      >
+        <div className={styles["oompa-card__closed-container"]}>
+          <h2 className={styles["oompa-card__name"]}>{name}</h2>
+          <p className={styles["oompa-card__email"]}>{email}</p>
+          <div style={{ flexGrow: 1 }}></div>
+          <button className="transparent-button" onClick={() => setOpen(!open)}>
+            <ChevronDown
+              className={cx(styles["oompa-card__open-button"], {
+                [styles["oompa-card__open-button--closed"]]: !open,
+                [styles["oompa-card__open-button--open"]]: open,
+              })}
+            />
+          </button>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <Layout>
       <Sidebar />
@@ -134,7 +162,7 @@ const Manager = () => {
         ) : (
           <div className={styles["main__card-container"]}>
             {oompas.map((oompa) => {
-              return <div>{oompa.email}</div>;
+              return <OompaCard oompa={oompa} />;
             })}
           </div>
         )}
