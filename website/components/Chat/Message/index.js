@@ -3,6 +3,10 @@ import { useContext } from "react";
 import UserContext from "../../userContext";
 export default function Message({ message, author }) {
   const { user } = useContext(UserContext);
+
+  if (!author) {
+    return null;
+  }
   return (
     <div className={styles.message}>
       <img src={author.photoUrl} alt="" />

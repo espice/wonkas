@@ -76,9 +76,7 @@ const Chat = () => {
     setMessage("");
   };
 
-  useEffect(() => {
-    scrollRef.current.scrollIntoView({ behavior: "smooth" });
-  }, [messages]);
+  useEffect(() => {}, [messages]);
   return (
     <Layout>
       <Sidebar />
