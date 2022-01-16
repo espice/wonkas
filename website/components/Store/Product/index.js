@@ -10,14 +10,23 @@ export default function Product({ product, size, id}) {
     }))
   },[])
   function CartAppend(prod){
-    console.log(prod._id)
-    console.log([...cartItems, prod._id])
+    console.log(prod)
+    console.log([...cartItems, prod])
     setCartItems(cartItems => 
-      [...cartItems, prod._id]
+      [...cartItems, {product:product, quantity:amount}]
     );
+    let iterate = 0
+    let amount = 1
+    cartItems.forEach(element => {
+      if (element.product._id  === prod._id){
+        setCartItems(cartItems.splice(iterate,1))
+        amount = element.quantity + 1
+    }
+    iterate += 1
+  });
     console.log(cartItems)
     const cartUpdate = axios.post("/api/cart/update", {
-      cart: [...cartItems, prod._id]
+      cart: [...cartItems, {product:product, quantity:amount}]
     }).then((cart) => {
       console.log(cart.data.cart)
     })

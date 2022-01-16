@@ -19,7 +19,7 @@ const user = require("@models/user");
 const server = require("http").createServer(app);
 const locations = require("@routes/api/locations");
 const paycheck = require("@routes/paycheck");
-
+const total = require("@routes/api/total");
 
 bcrypt.hash("mypassword", 15, function (err, hash) {});
 
@@ -91,6 +91,7 @@ app.use("/products", products);
 app.use("/api/messages", messages);
 app.use("/oompaloompas", oompaloompas);
 app.use("/api/locations", locations);
+app.use("/api/total", total)
 
 app.get("/", (req, res) => {
   res.send("Hello World!");

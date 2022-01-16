@@ -1,5 +1,5 @@
 const { Router } = require("express");
-
+const Product = require("@models/product");
 const auth = require("@middleware/auth");
 const router = Router();
 
@@ -43,10 +43,10 @@ router.get("/products", auth, async (req, res) => {
 
   const populated_messages = await user.populate({
     path: "cart",
-    model: "Product"
+    model:  Product
   })
   console.log(populated_messages.cart)
-  console.log(typeof(populated_messages.cart[0]))
+  console.log(typeof(populated_messages.cart))
   return res.send({ success: true, cart: populated_messages.cart });
 })
 
