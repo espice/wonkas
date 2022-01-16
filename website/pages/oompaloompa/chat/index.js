@@ -65,6 +65,7 @@ const Chat = () => {
       <div className={styles.main}>
         <h1 className={styles.main__heading}>Chat</h1>
         <p>For {user.location} workers</p>
+        <br/>
         <div className={styles.main__messages}>
           {messages.map((message) => {
             return (
