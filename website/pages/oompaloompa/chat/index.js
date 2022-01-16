@@ -10,14 +10,14 @@ import Sidebar from "../../../components/SideNav";
 import styles from "./index.module.scss";
 
 const Chat = () => {
-  const { user } = useContext(UserContext);
+  const { user, loading: userLoading } = useContext(UserContext);
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
   const [socket, setSocket] = useState(null);
   const scrollRef = useRef(null);
 
   useEffect(async () => {
-    if (Object.keys(user).length !== 0) {
+    if (Object.keys(user).length !== 0 && !userLoading) {
       const messages = await axios.get(`/api/messages/${user.location}`);
       setMessages(messages.data.messages);
 
@@ -32,7 +32,7 @@ const Chat = () => {
 
       setSocket(socket);
     }
-  }, [user]);
+  }, [user, userLoading]);
 
   useEffect(() => {
     if (socket) {
