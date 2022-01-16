@@ -61,7 +61,12 @@ const SidebarLink = ({ linkId, text }) => {
     isLinkActive = true;
   }
   return (
-    <Link href={sidebarLinkData[linkId]["route"]}>
+    <div
+      onClick={(e) => {
+        window.location.href = sidebarLinkData[linkId]["route"];
+      }}
+      className={styles["sidebar__link__div"]}
+    >
       <a
         className={cx({
           sidebar__link: true,
@@ -71,7 +76,7 @@ const SidebarLink = ({ linkId, text }) => {
         {sidebarLinkData[linkId]["icon"]}
         <span>{text}</span>
       </a>
-    </Link>
+    </div>
   );
 };
 
