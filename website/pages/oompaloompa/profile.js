@@ -39,7 +39,7 @@ export default function Profile() {
         <div className={styles.container__extra}>
           <div className={styles.container__extra__item}>
             <h3>Role</h3>
-            <h2>Manager</h2>
+            <h2>Oompa Loompa</h2>
           </div>
 
           <div className={styles.container__extra__item}>
