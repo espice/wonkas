@@ -90,11 +90,7 @@ app.use("/api/cart", cart);
 app.use("/products", products);
 app.use("/api/messages", messages);
 app.use("/oompaloompas", oompaloompas);
-<<<<<<< HEAD
-app.use("/paycheck", paycheck)
-=======
 app.use("/api/locations", locations);
->>>>>>> 6d4e0c37538fb3a6a1b8f53cec7e2c18f38647ce
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
