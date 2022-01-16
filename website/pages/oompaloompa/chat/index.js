@@ -10,7 +10,7 @@ import Sidebar from "../../../components/SideNav";
 import styles from "./index.module.scss";
 
 const Chat = () => {
-  const { user, loading: userLoading } = useContext(UserContext);
+  const { user } = useContext(UserContext);
   const [message, setMessage] = useState("");
   const [messages, setMessages] = useState([]);
   const [socket, setSocket] = useState(null);
@@ -25,7 +25,7 @@ const Chat = () => {
     };
   }, []);
   useEffect(async () => {
-    if (Object.keys(user).length !== 0 && !userLoading) {
+    if (Object.keys(user).length !== 0) {
       const messages = await axios.get(`/api/messages/${user.location}`);
       setMessages(messages.data.messages);
 
@@ -40,7 +40,7 @@ const Chat = () => {
 
       setSocket(socket);
     }
-  }, [user, userLoading]);
+  }, [user]);
 
   useEffect(() => {
     if (socket) {
