@@ -77,6 +77,8 @@ const Chat = () => {
   };
 
   useEffect(() => {
+    if (!scrollRef.current) return;
+
     scrollRef.current.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
   return (
