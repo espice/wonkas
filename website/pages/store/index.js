@@ -7,7 +7,7 @@ import Cart from "../../components/Store/Cart";
 import Product from "../../components/Store/Product";
 import SearchBar from "../../components/Store/SearchBar";
 export default function Store() {
-  const {user} = useContext(UserContext);
+  const { user } = useContext(UserContext);
   const [cartItems, setCartItems] = useState([]);
   const [searchResults, setSearchResults] = useState([]);
   const [productList, setProductList] = useState([]);
@@ -28,7 +28,7 @@ export default function Store() {
     if (user) {
       setUserId(user._id);
     }
-  } , [user]);
+  }, [user]);
   return (
     <Layout title="Store">
       <div className={styles.container}>
@@ -41,7 +41,7 @@ export default function Store() {
           </div>
 
           {productList.map((product) => {
-            return <Product product={product} size="small" id={userId}/>;
+            return <Product product={product} size="small" id={userId} />;
           })}
         </div>
       </div>
