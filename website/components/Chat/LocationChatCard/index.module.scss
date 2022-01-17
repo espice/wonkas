@@ -7,12 +7,25 @@
   background-color: rgb(255, 255, 255);
   display: flex;
   flex-flow: column;
+  position: relative;
 
   &__header {
+    display: flex;
+
     h2 {
       font-size: 20px;
       font-weight: 700;
       color: var(--cool-grey-800);
+    }
+
+    &__details {
+      margin: auto 0 auto auto;
+      cursor: pointer;
+      content: url("https://api.iconify.design/bi/three-dots-vertical.svg?color=%23646464&height=20");
+
+      &:hover {
+        content: url("https://api.iconify.design/bi/three-dots-vertical.svg?color=%23363636&height=20");
+      }
     }
   }
 

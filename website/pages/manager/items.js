@@ -31,6 +31,7 @@ const Manager = () => {
     const [description, setDescription] = useState("");
     const [price, setPrice] = useState("");
     const [img, setImg] = useState("");
+    const [imgFileName, setImgFileName] = useState("");
     const [addLoading, setAddLoading] = useState(false);
 
     return (
@@ -84,7 +85,7 @@ const Manager = () => {
             value={price}
             onChange={(e) => setPrice(e.target.value)}
           />
-          {/* <button
+          <button
             className={styles["popup__input"]}
             style={{
               color: "gray",
@@ -105,21 +106,23 @@ const Manager = () => {
               src="https://cdn-icons-png.flaticon.com/512/1092/1092220.png"
             />
           </button>
+          <h5>{imgFileName}</h5>
           <input
             placeholder="Upload Image"
             type="file"
             required={true}
+            onChange={(e) => {
+              setImgFileName(e.target.files[0].name);
+              const reader = new FileReader();
+              reader.readAsDataURL(e.target.files[0]);
+              reader.onload = () => {
+                setImg(reader.result);
+              };
+            }}
             id="newItemImgInput"
             style={{ opacity: 0, position: "absolute", zIndex: -1 }}
-          /> */}
-          <input
-            className={styles["popup__input"]}
-            placeholder="Image URL"
-            required={true}
-            required={true}
-            value={img}
-            onChange={(e) => setImg(e.target.value)}
           />
+
           <div className={styles["popup__form__submit-group"]}>
             <button
               className="button-primary"
