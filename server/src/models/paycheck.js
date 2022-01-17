@@ -24,6 +24,7 @@ const paycheckSchema = mongoose.Schema({
       {
         amount: Number,
         date: Date,
+
       },
     ],
     default: [],

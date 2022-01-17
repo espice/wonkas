@@ -41,6 +41,16 @@ router.put("/manager/:userid", auth, managerOnly, async (req, res) => {
     { _id: req.params.userid },
     { isManager: !user.isManager }
   );
+  console.log(updatedUser)
+  if (updatedUser.isManager){
+    await paycheck.deleteOne({user: updatedUser._id})
+  }
+  else {
+    await paycheck.create({
+      user: updatedUser._id,
+    })
+  }
+  
 
   res.send({ success: true });
 });
