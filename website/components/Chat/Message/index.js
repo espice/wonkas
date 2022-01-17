@@ -14,7 +14,12 @@ export default function Message({ message, author }) {
       <div className={styles.message__column}>
         <p className={styles.message__column__name}>
           {author._id == user._id ? "You" : author.name}
+
+          {author.isManager ? (
+            <div className={styles.message__column__role} />
+          ) : null}
         </p>
+
         <p className={styles.message__column__message}>{message}</p>
       </div>
     </div>

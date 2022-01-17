@@ -1,0 +1,52 @@
+.card {
+  display: flex;
+  flex-flow: column;
+  background-color: #f9f9f9;
+  position: absolute;
+  top: 10px;
+  right: 15px;
+
+  transition: 0.3s cubic-bezier(0.76, 0, 0.24, 1);
+  box-shadow: 4px 4px 48px rgba(0, 0, 0, 0.25);
+  border-radius: 6px;
+
+  &__option:first-child {
+    border-top-right-radius: 6px;
+    border-top-left-radius: 6px;
+  }
+
+  &__option:last-child {
+    border-bottom-right-radius: 6px;
+    border-bottom-left-radius: 6px;
+  }
+  &__option {
+    padding: 20px;
+    display: flex;
+    transition: all 0.2s;
+    cursor: pointer;
+
+    &:hover {
+      background-color: rgba(#adadad, 0.58);
+    }
+    &__p {
+      margin: auto auto auto 0;
+    }
+
+    &__icon {
+      margin: auto 0 auto auto;
+    }
+  }
+
+  animation: popup 0.2s ease-in;
+}
+
+@keyframes popup {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
