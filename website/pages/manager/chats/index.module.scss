@@ -13,7 +13,7 @@
   &__header {
     width: 100%;
     display: flex;
-
+    margin-bottom: 20px;
     &__title {
       display: flex;
       flex-flow: column;
@@ -33,7 +33,7 @@
   }
 
   &__messages {
-    margin-top: 30px;
+    margin-top: auto;
     display: flex;
     flex-flow: column;
     gap: 20px;
