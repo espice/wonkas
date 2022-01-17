@@ -28,7 +28,12 @@ const userSchema = new mongoose.Schema(
     tasks: { type: [{ description: String, completed: Boolean }], default: [] },
     notifs: { type: Array, default: [] },
     location: { type: String, default: "Reception" },
-    cart: [], default: [] },
+    cart: { type: Array, default: [] },
+    paycheck: {
+      type: mongoose.Types.ObjectId,
+      required: [true, "Paycheck missing"],
+    },
+  },
   { timestamps: true }
 );
 

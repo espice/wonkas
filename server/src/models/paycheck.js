@@ -5,23 +5,28 @@ const paycheckSchema = mongoose.Schema({
     type: mongoose.Types.ObjectId,
     required: [true, "User is missing"],
   },
-  amount: {
+  amountDue: {
     type: Number,
-    default: 100,
-    required: [true, "Amount is missing"],
+    default: 0,
   },
-  nextPayday: {
+  salary: {
+    type: Number,
+    default: 300,
+  },
+  nextPaycheck: {
     type: Date,
-    required: [true, "Payday is missing"],
+    default: new Date(
+      new Date(new Date().setMonth(new Date().getMonth() + 1)).setDate(1)
+    ),
   },
-  salaryHistory: {
+  paycheckHistory: {
     type: [
       {
         amount: Number,
         date: Date,
-        isCollected: Boolean,
       },
     ],
+    default: [],
   },
 });
 

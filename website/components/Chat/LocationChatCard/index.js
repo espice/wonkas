@@ -9,11 +9,11 @@ export default function LocationChatCard({ location }) {
     if (response.data.messages.length === 0) {
       return setpeopleData([]);
     }
-    response.data.messages.map((message) => {
-      if (!peopleData.includes(message.author.photoUrl)) {
-        setpeopleData((peopleData) => [...peopleData, message.author.photoUrl]);
-      }
+    response.data.messages.forEach((message) => {
+      setpeopleData((peopleData) => [...peopleData, message.author.photoUrl]);
     });
+
+    setpeopleData([...new Set(peopleData)]);
   }, []);
   return (
     <div className={styles.card}>
@@ -23,9 +23,7 @@ export default function LocationChatCard({ location }) {
 
       <div className={styles.card__footer}>
         <div className={styles.card__footer__people}>
-          {console.log(peopleData)}
           {peopleData.map((photoUrl, index) => {
-            console.log(photoUrl);
             return (
               <img
                 src={photoUrl}
