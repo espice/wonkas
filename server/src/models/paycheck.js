@@ -11,7 +11,7 @@ const paycheckSchema = mongoose.Schema({
   },
   salary: {
     type: Number,
-    default: 300,
+    default: 150,
   },
   nextPaycheck: {
     type: Date,

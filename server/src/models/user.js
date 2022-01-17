@@ -29,10 +29,6 @@ const userSchema = new mongoose.Schema(
     notifs: { type: Array, default: [] },
     location: { type: String, default: "Reception" },
     cart: { type: Array, default: [] },
-    paycheck: {
-      type: mongoose.Types.ObjectId,
-      required: [true, "Paycheck missing"],
-    },
   },
   { timestamps: true }
 );

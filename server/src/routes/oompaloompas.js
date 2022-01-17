@@ -4,6 +4,7 @@ const router = Router();
 const User = require("@models/user");
 const auth = require("@middleware/auth");
 const managerOnly = require("@middleware/managerOnly");
+const paycheck = require("@models/paycheck");
 const bcrypt = require("bcrypt");
 
 const { AvatarGenerator } = require("random-avatar-generator");
@@ -26,6 +27,10 @@ router.post("/", auth, managerOnly, async (req, res) => {
     password: pass,
     role: "oompaloompa",
   });
+  const newPaycheck = await paycheck.create({
+    user: newUser._id,
+  })
+
   res.send({ success: true });
 });
 
