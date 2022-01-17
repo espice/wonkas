@@ -11,13 +11,13 @@ import SideNav from "../components/SideNav";
 
 export default function App() {
   const [session, loading] = useSession();
-  const [popupState, setPopupState] = useState(false);
+  const [loginPopupState, setLoginPopupState] = useState(false);
   const [loginPopupMethod, setLoginPopupMethod] = useState(null);
   const [loginPopupStep, setLoginPopupStep] = useState(0);
   const popupRef = useState();
 
   useOnClickOutside(popupRef, () => {
-    setPopupState(false);
+    setLoginPopupState(false);
     setLoginPopupMethod(null);
     setLoginPopupStep(0);
   });
@@ -25,29 +25,36 @@ export default function App() {
   if (!session) {
     return (
       <Layout>
-        {/* <SideNav></SideNav> */}
-        <br></br>
-        <button
-          style={{ "margin-left": "200px" }}
-          onClick={() => setPopupState(true)}
-        >
-          Get Started
-        </button>
+        <div className={styles["landing"]}>
+          <div>
+            <h1>
+              We make Chocolates
+              <br />
+              that make your mind go <br />
+              <i>whoosh</i>
+            </h1>
+            <button onClick={() => setLoginPopupState(true)}>
+              Get Started
+            </button>
+          </div>
+
+          <img src="/wonka_bar.png" />
+        </div>
+
         <Popup
-          popupState={popupState}
+          popupState={loginPopupState}
           ref={popupRef}
           center
-          className={styles["login-popup"]}
-        >
+          className={styles["login-popup"]}>
           {loginPopupStep == 0 ? (
             <LoginChooser
-              setPopupState={setPopupState}
+              setPopupState={setLoginPopupState}
               setStep={setLoginPopupStep}
               method={loginPopupMethod}
               setMethod={setLoginPopupMethod}
             />
           ) : (
-            <LoginForm method={loginPopupMethod} setOpen={setPopupState} />
+            <LoginForm method={loginPopupMethod} setOpen={setLoginPopupState} />
           )}
         </Popup>
       </Layout>
