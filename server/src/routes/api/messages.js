@@ -22,19 +22,17 @@ router.get("/:location", auth, async (req, res) => {
   return res.send({ success: true, messages: messages });
 });
 
-router.get("/messages/:location", auth, async (req, res) => {
+router.get("/clear/:location", auth, async (req, res) => {
   const userId = req.user.id;
   const userObj = await user.findOne({ _id: userId });
 
-  if (!req.user) {
+  if (!req.user || !userObj.isManager) {
     return res.send({ success: false, message: "Unauthorized" });
   }
 
-  const messages = message.find({ location: req.params.location });
-  return res.send({
-    success: true,
-    messageCount: messages.length,
-    location: req.params.location,
-  });
+  const location = req.params.location;
+  console.log(location);
+  await message.deleteMany({ location: location });
+  return res.send({ success: true, location: location });
 });
 module.exports = router;
