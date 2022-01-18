@@ -2,6 +2,7 @@ import Layout from "../../../components/Layout";
 import axios from "../../../config/axios";
 import SideNav from "../../../components/SideNav";
 import PayCheckPopup from "../../../components/PaycheckPayPopup";
+import PopupHistory from "../../../components/PaycheckHistoryPopup";
 import { Popup, useOnClickOutside } from "../../../components/Popup";
 import styles from "./index.module.scss";
 import { useState, useEffect, useRef } from "react";
@@ -13,13 +14,20 @@ const Paychecks = () => {
   const [paychecks, setPaychecks] = useState([]);
   const [editPayCheck, setEditPayCheck] = useState({});
   const [total, setTotal] = useState(0);
-  const [buttonUser, setButtonUser] = useState({});
+  const [popupUser, setPopupUser] = useState({});
   const [old, setOld] = useState({});
   const [isPayPopupOpen, setIsPayPopupOpen] = useState(false);
-  const popupRef = useRef(null);
+  const [isHistoryPopupOpen, setIsHistoryPopupOpen] = useState(false);
+  const [historyPopupData, setHistoryPopupData] = useState(null);
 
-  useOnClickOutside(popupRef, () => {
+  const paypopupRef = useRef(null);
+  const historypopupRef = useRef(null);
+
+  useOnClickOutside(paypopupRef, () => {
     setIsPayPopupOpen(false);
+  });
+  useOnClickOutside(historypopupRef, () => {
+    setIsHistoryPopupOpen(false);
   });
 
   useEffect(async () => {
@@ -93,6 +101,10 @@ const Paychecks = () => {
                         main__content__category__row__actions__button: true,
                         "button-primary": true,
                       })}
+                      onClick={(e) => {
+                        setHistoryPopupData(value);
+                        setIsHistoryPopupOpen(true);
+                      }}
                     >
                       View History
                     </button>
@@ -102,7 +114,7 @@ const Paychecks = () => {
                         "button-primary": true,
                       })}
                       onClick={(e) => {
-                        setIsPayPopupOpen(true), setButtonUser(value.user);
+                        setIsPayPopupOpen(true), setPopupUser(value.user);
                       }}
                     >
                       Pay Now
@@ -114,8 +126,22 @@ const Paychecks = () => {
           </div>
         </div>
 
-        <Popup popupState={isPayPopupOpen} ref={popupRef} center>
-          <PayCheckPopup userId={buttonUser} />
+        <Popup popupState={isPayPopupOpen} ref={paypopupRef} center>
+          <PayCheckPopup userId={popupUser} />
+        </Popup>
+
+        <Popup
+          popupState={isHistoryPopupOpen}
+          ref={historypopupRef}
+          className={styles["stuff"]}
+          center
+        >
+          {historyPopupData ? (
+            <PopupHistory
+              user={historyPopupData.user}
+              history={historyPopupData.paycheckHistory}
+            />
+          ) : null}
         </Popup>
       </div>
     </Layout>

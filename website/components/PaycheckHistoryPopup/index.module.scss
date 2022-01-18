@@ -1,0 +1,97 @@
+.popup {
+  background-color: #f9f9f9;
+  overflow: hidden;
+  max-height: 100%;
+  &__header {
+    display: flex;
+    flex-flow: column;
+    gap: 10px;
+
+    &__close {
+      content: url("https://api.iconify.design/eva/close-fill.svg?color=%239210CF&width=28&height=28");
+      width: 28px;
+      height: 28px;
+      margin-left: -5px;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    &__heading {
+      color: #323f4b;
+      font-weight: 600;
+      font-size: 30px;
+    }
+
+    p {
+      color: #52606d;
+      font-weight: 600;
+    }
+  }
+
+  &__content {
+    margin-top: 30px;
+    width: 100%;
+    display: flex;
+    flex-flow: column;
+    gap: 20px;
+    overflow-y: auto;
+    scroll-behavior: smooth;
+    height: 100%;
+
+    &::-webkit-scrollbar {
+      width: 3px;
+    }
+
+    &::-webkit-scrollbar-track {
+      -webkit-box-shadow: inset 0 0 6px transparent;
+      border-radius: 4px;
+      box-shadow: inset 0 0 6px #f9f9f9;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      border-radius: 4px;
+      -webkit-box-shadow: inset 0 0 6px #52606d;
+      box-shadow: inset 0 0 6px #52606d;
+    }
+
+    &__row {
+      width: 100%;
+      display: flex;
+
+      &__label {
+        display: flex;
+        gap: 5px;
+        white-space: nowrap;
+        min-width: 100px;
+        text-align: left;
+
+        p {
+          margin-right: auto;
+          font-size: 20px;
+          color: #323f4b;
+          font-weight: 600;
+        }
+      }
+
+      &__middle {
+        margin: auto;
+        width: 100%;
+        text-align: center;
+      }
+
+      &__action {
+        margin: auto 5px auto auto;
+
+        &__label {
+          &__danger {
+            white-space: nowrap;
+            color: #ff5252;
+            font-weight: 600;
+          }
+        }
+      }
+    }
+  }
+}
