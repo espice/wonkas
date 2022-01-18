@@ -28,6 +28,11 @@ body {
   color: var(--primary);
   background-color: rgba(#5c0099, 0.2);
   cursor: pointer;
+
+  transition: all 0.2s;
+  &:hover {
+    background-color: rgba(#5c0099, 0.3);
+  }
 }
 
 .button-red {
@@ -41,6 +46,12 @@ body {
   color: #e01a1a;
   background-color: rgba(#e01a1a, 0.2);
   cursor: pointer;
+
+  transition: all 0.2s;
+
+  &:hover {
+    background-color: rgba(#e01a1a, 0.3);
+  }
 }
 ::-webkit-scrollbar {
   width: 5px;

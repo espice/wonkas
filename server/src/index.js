@@ -83,7 +83,7 @@ app.use(function (req, res, next) {
 
 app.use(express.json({ limit: "50mb" }));
 app.use(cookieParser());
-app.use(express.urlencoded({ limit: "50mb" }));
+app.use(express.urlencoded({ extended: true, limit: "50mb" }));
 
 app.use("/auth", auth);
 app.use("/tasks", tasks);
@@ -93,6 +93,7 @@ app.use("/api/messages", messages);
 app.use("/oompaloompas", oompaloompas);
 app.use("/api/locations", locations);
 app.use("/api/total", total);
+
 app.use("/api/paycheck", paycheck);
 
 app.get("/", (req, res) => {

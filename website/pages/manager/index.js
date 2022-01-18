@@ -12,7 +12,7 @@ const cx = classNames.bind(styles);
 
 import { useContext, useState, useRef, useEffect } from "react";
 import UserContext from "../../components/userContext";
-
+import Select from "react-select";
 import axios from "../../config/axios";
 
 const Manager = () => {
@@ -23,7 +23,18 @@ const Manager = () => {
   const [reload, setReload] = useState(false);
   const [oompas, setOoompas] = useState([]);
   const [loading, setLoading] = useState(true);
-
+  const [locationNew, setLocationNew] = useState("");
+  const [options, setOptions] = useState([
+    { value: 'Reception', label: 'Reception' },
+    { value: 'Elevator', label: 'Great Glass Elevator' },
+    { value: 'Nut Room', label: 'Nut Room' },
+    { value: 'Inventing Room', label: 'Inventing Room' },
+    { value: 'Testing Room', label: 'Testing Room' },
+    { value: 'Chocolate Room', label: 'Chocolate Room' },
+    { value: 'Chocolate River', label: 'Chocolate River' },
+    { value: 'Storage', label: 'Storage' },
+    { value: 'Supply', label: 'Supply' },
+  ]);
   const popupRef = useRef();
   const pswdPopupRef = useRef();
 
@@ -118,11 +129,11 @@ const Manager = () => {
   };
 
   const OompaCard = ({ oompa }) => {
-    const { name, email, isManager, _id } = oompa;
+    const { name, email, isManager, _id, location } = oompa;
     const [open, setOpen] = useState(false);
     const [manager, setManager] = useState(isManager);
     const [deleteLoading, setDeleteLoading] = useState(false);
-
+    console.log(location)
     async function updateManagerState() {
       setManager(!manager);
       await axios.put(`/oompaloompas/manager/${_id}`);
@@ -139,7 +150,7 @@ const Manager = () => {
           <h2 className={styles["oompa-card__name"]}>{name}</h2>
           <p className={styles["oompa-card__email"]}>{email}</p>
           <div style={{ flexGrow: 1 }}></div>
-          <button className="transparent-button" onClick={() => setOpen(!open)}>
+          <button className="transparent-button" onClick={(e) => {setOpen(!open), console.log(open)}}>
             <ChevronDown
               className={cx(styles["oompa-card__open-button"], {
                 [styles["oompa-card__open-button--closed"]]: !open,
@@ -166,11 +177,19 @@ const Manager = () => {
               // {...otherProps}
             />
           </div>
-
           <div className={styles["oompa-card__stat-container"]}>
             <p>Assigned To</p>
             <div style={{ flexGrow: 1 }}></div>
-            {oompa.location}
+    
+              <Select options={options} defaultValue={location} placeholder={location} onChange={(e) => {setLocationNew(e.value)
+              axios.post("/api/locations/updateuser", {
+                oompaId: _id,
+                location: e.value
+              }).then(value => {
+                console.log(value.data)
+                setReload(!reload)
+              })
+              }}/>
           </div>
           <div className={styles["oompa-card__action-btn-container"]}>
             <button className="button-primary" onClick={() => setPswdPopup(true)} style={{ marginLeft: "12px" }}>

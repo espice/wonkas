@@ -1,24 +1,114 @@
 .container {
-  width: 100%;
-  height: 100%;
+  width: 100vw;
+  min-height: 100vh;
+  background: #f9f9f9;
   display: flex;
-  flex-flow: column;
-  background-color: #f9f9f9;
-  height: 100vh;
-  width: 100%;
-  padding-left: 30px;
-  padding-right: 24px;
-  padding-top: 40px;
+  flex-direction: column;
+  padding: 30px;
+  gap: 30px;
 
-  &__heading {
+  & > div {
     display: flex;
-    flex-flow: column;
-    gap: 10px;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+  }
 
-    h1 {
-      color: #5c0099;
+  & h1 {
+    color: #5c0099;
+    font-weight: 600;
+  }
+
+  & > div:nth-child(2) {
+    justify-content: center;
+    position: relative;
+  }
+
+  .cartIcon {
+    height: 30px;
+    filter: contrast(0%);
+    margin-top: 10px;
+  }
+
+  .searchBar {
+    & input {
+      width: 65vw;
+      height: 50px;
+      border: 3px solid #e4e7eb;
+      border-radius: 3px;
+      color: #616e7c;
       font-weight: 600;
-      font-size: 30px;
+      font-size: medium;
+      padding: 10px;
+      outline: none !important;
+    }
+
+    & .searchIcon {
+      position: absolute;
+      top: 12.5px;
+      right: 17vw;
+      height: 25px;
+      filter: contrast(0%);
+    }
+  }
+
+  & > div:nth-child(3) {
+    justify-content: space-evenly;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .productCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    padding: 50px;
+    border-radius: 3px;
+
+    & > img {
+      width: 175px;
+      margin-bottom: 20px;
+    }
+
+    & > h2 {
+      color: #47505a;
+      margin-bottom: 10px;
+    }
+
+    & > h4 {
+      color: #616e7c;
+      font-weight: normal;
+      margin-bottom: 20px;
+    }
+
+    & > div {
+      display: flex;
+      width: 100%;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-evenly;
+
+      & > button {
+        padding: 5px 10px;
+        cursor: pointer;
+      }
+
+      & > button:nth-child(1) {
+        background-color: rgba(#5c0099, 20%);
+        color: #5c0099;
+        border: 3px solid #5c0099;
+        border-radius: 3px;
+      }
+
+      & > button:nth-child(2) {
+        background-color: rgba(#d4af37, 20%);
+        color: #d4af37;
+        border: 3px solid #d4af37;
+        border-radius: 3px;
+      }
     }
   }
 }
