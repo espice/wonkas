@@ -1,5 +1,5 @@
 const config = {
-  serverUrl: "http://localhost:4000",
+  serverUrl: "https://wonka-server.herokuapp.com/",
 };
 
 export default config;
