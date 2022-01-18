@@ -2,6 +2,9 @@ import styles from "./index.module.scss";
 import Loading from "../../Loading";
 import { useState, useEffect, useRef } from "react";
 import axios from "../../../config/axios";
+
+import PlusIcon from "../../../public/icons/plus.svg";
+
 export default function TasksPopup({ setOpen, oompaLoompa }) {
   const [tasks, setTasks] = useState([]);
   const [taskText, setTaskText] = useState("");
@@ -53,7 +56,14 @@ export default function TasksPopup({ setOpen, oompaLoompa }) {
     return (
       <div className={styles.popup}>
         <div className={styles.popup__header}>
-          <div className={styles.popup__header__close} />
+          <div>
+            <button
+              className={styles["close-button"]}
+              onClick={() => setOpen(false)}
+            >
+              <PlusIcon className={styles["close-button__icon"]} />
+            </button>
+          </div>
           <h1 className={styles.popup__header__heading}>Tasks</h1>
           <p>
             Manage tasks for <b>{oompaLoompa.name}</b>

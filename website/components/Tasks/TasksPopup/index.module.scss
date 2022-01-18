@@ -1,3 +1,15 @@
+.close-button {
+  border: none;
+  background-color: #f9f9f9;
+
+  &__icon {
+    transform: scale(1.5) rotate(45deg);
+    color: var(--primary);
+    cursor: pointer;
+  }
+}
+
+
 .popup {
   background-color: #f9f9f9;
   overflow: hidden;
@@ -102,13 +114,14 @@
 
     &__input {
       padding: 10px;
-      border: 2px solid #e4e7eb;
+      border: 4px solid #e4e7eb;
       border-radius: 6px;
-
+      height: 70px;
+      background-color: #fff;
       outline: none;
       font-size: 18px;
       width: 92%;
-      background-color: transparent;
+      // background-color: transparent;
       color: #323f4b;
       transition: all 0.2s;
 
@@ -121,8 +134,8 @@
 
     &__new {
       content: url("https://api.iconify.design/teenyicons/tick-solid.svg?color=%235C0099");
-      width: 20px;
-      height: 20px;
+      width: 28px;
+      height: 28px;
       margin: auto 0 auto auto;
       transition: all 0.2s;
 
