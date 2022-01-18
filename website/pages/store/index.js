@@ -92,7 +92,7 @@ export default function Store() {
     return (
       <Layout title="Store">
         <div className={styles["container"]}>
-          <div>
+          <div className={styles["nav"]}>
             <h1>Wonka's</h1>
 
             <img
@@ -111,8 +111,16 @@ export default function Store() {
               Log Out
             </button>
           </div>
-
-          <div>
+          <div style={{ height: "30px" }} />
+          <div
+            styles={{
+              width: "100vw",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              backgroundColor:"red"
+            }}
+          >
             <div className={styles["searchBar"]}>
               <input type="text" placeholder="Search" />
               <img
@@ -122,7 +130,7 @@ export default function Store() {
             </div>
           </div>
 
-          <div>
+          <div className={styles["products-container"]}>
             {productList.map((product) => {
               let existsInCart = false;
               if (cartItems.length > 0) {
@@ -180,6 +188,7 @@ export default function Store() {
                     </div>
                   ) : (
                     <button
+                      className={styles["btn-primary"]}
                       onClick={() => {
                         cartItems.push({ id: product._id, quantity: 1 });
 

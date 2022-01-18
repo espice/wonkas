@@ -22,51 +22,50 @@ export default function App() {
     setLoginPopupStep(0);
   });
 
-  if (!session) {
-    return (
-      <Layout>
-        <div className={styles["landing"]}>
-          <div>
-            <h1>
-              We make Chocolates
-              <br />
-              that make your mind go <br />
-              <i>whoosh</i>
-            </h1>
-            <button onClick={() => setLoginPopupState(true)}>
-              Get Started
-            </button>
-          </div>
-
-          <img src="/wonka_bar.png" />
+  return (
+    <Layout>
+      <nav className={styles["nav"]}>
+        <img src="/logo.png" />
+        <div style={{ flexGrow: 1 }} />
+        <button
+          className="button-primary"
+          onClick={() => setLoginPopupState(true)}
+          style={{ paddingLeft: "30px", paddingRight: "30px" }}
+        >
+          Get Started
+        </button>
+      </nav>
+      <div className={styles["landing"]}>
+        <div>
+          <h1>
+            We make Chocolates
+            <br />
+            that make your mind go <br />
+            <i>whoosh</i>
+          </h1>
+          <button onClick={() => setLoginPopupState(true)}>Get Started</button>
         </div>
 
-        <Popup
-          popupState={loginPopupState}
-          ref={popupRef}
-          center
-          className={styles["login-popup"]}>
-          {loginPopupStep == 0 ? (
-            <LoginChooser
-              setPopupState={setLoginPopupState}
-              setStep={setLoginPopupStep}
-              method={loginPopupMethod}
-              setMethod={setLoginPopupMethod}
-            />
-          ) : (
-            <LoginForm method={loginPopupMethod} setOpen={setLoginPopupState} />
-          )}
-        </Popup>
-      </Layout>
-    );
-  } else {
-    return (
-      <>
-        <img src={session.user.image} />
-        <h2>{session.user.name}</h2>
-        <p>{session.user.email}</p>
-        <button onClick={signOut}>Logout</button>
-      </>
-    );
-  }
+        <img src="/wonka_bar.png" />
+      </div>
+
+      <Popup
+        popupState={loginPopupState}
+        ref={popupRef}
+        center
+        className={styles["login-popup"]}
+      >
+        {loginPopupStep == 0 ? (
+          <LoginChooser
+            setPopupState={setLoginPopupState}
+            setStep={setLoginPopupStep}
+            method={loginPopupMethod}
+            setMethod={setLoginPopupMethod}
+          />
+        ) : (
+          <LoginForm method={loginPopupMethod} setOpen={setLoginPopupState} />
+        )}
+      </Popup>
+    </Layout>
+  );
 }

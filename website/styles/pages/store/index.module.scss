@@ -6,6 +6,8 @@
   flex-direction: column;
   padding: 30px;
   gap: 30px;
+  padding-top: 90px;
+  overflow-x: hidden;
 
   & > div {
     display: flex;
@@ -17,6 +19,7 @@
   & h1 {
     color: #5c0099;
     font-weight: 600;
+    font-size: 28px;
   }
 
   & > div:nth-child(2) {
@@ -27,33 +30,39 @@
   .cartIcon {
     height: 30px;
     filter: contrast(0%);
-    margin: 13px 30px auto auto;
+    // margin: 13px 30px auto auto;
     cursor: pointer;
   }
 
   .searchBar {
+    position: relative;
+    margin-left: 50vw;
+    transform: translateX(-50%);
+
     & input {
       width: 65vw;
-      height: 50px;
+      height: 70px;
       border: 3px solid #e4e7eb;
-      border-radius: 3px;
+      border-radius: 6px;
       color: #616e7c;
       font-weight: 600;
       font-size: medium;
-      padding: 10px;
+      padding: 20px;
       outline: none !important;
     }
 
     & .searchIcon {
       position: absolute;
-      top: 12.5px;
-      right: 17vw;
+      // top: 20px;
+      top: 22.5px;
+      bottom: 0;
+      right: 20px;
       height: 25px;
       filter: contrast(0%);
     }
   }
 
-  & > div:nth-child(3) {
+  & > div:nth-child(4) {
     justify-content: space-evenly;
     display: flex;
     flex-direction: row;
@@ -68,6 +77,8 @@
     background-color: white;
     padding: 50px;
     border-radius: 3px;
+    margin: 30px 10px;
+    width: 350px;
 
     & > img {
       width: 175px;
@@ -83,15 +94,6 @@
       color: #616e7c;
       font-weight: normal;
       margin-bottom: 15px;
-    }
-
-    & > button {
-      padding: 5px 10px;
-      cursor: pointer;
-      background-color: rgba(#5c0099, 20%);
-      color: #5c0099;
-      border: 3px solid #5c0099;
-      border-radius: 3px;
     }
 
     & > div {
@@ -114,4 +116,38 @@
       }
     }
   }
+}
+
+.btn-primary {
+  height: 50px;
+  padding-right: 12px;
+  padding-left: 12px;
+  border: solid 4px var(--primary);
+  border-radius: 5px;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--primary);
+  background-color: rgba(#5c0099, 0.2);
+  cursor: pointer;
+  margin-top: 10px;
+
+  transition: all 0.2s;
+  &:hover {
+    background-color: rgba(#5c0099, 0.3);
+  }
+}
+
+
+.nav{
+  width: 100vw;
+  height: 90px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  background-color: #F0F0F0;
+  padding-left: 30px;
+  display: flex;
+  align-items: center;
+  padding-right: 30px;
 }

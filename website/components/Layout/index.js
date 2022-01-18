@@ -20,7 +20,7 @@ const Layout = ({ children, title }) => {
         <meta charSet="utf-8" />
         <meta http-equiv="x-ua-compatible" content="ie=edge" />
         <meta name="theme-color" content="#0a6cff" />
-        <title>{title}</title>
+        <title>Wonka's</title>
       </Head>
       <Auth>
         {loading ? (
