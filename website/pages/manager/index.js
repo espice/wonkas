@@ -3,6 +3,7 @@ import Sidebar from "../../components/SideNav";
 import { FAB } from "../../components/Button";
 import PlusIcon from "../../public/icons/plus.svg";
 import ChevronDown from "../../public/icons/chevron_down.svg";
+import TasksPopup from "../../components/Tasks/TasksPopup";
 import { Popup, useOnClickOutside } from "../../components/Popup";
 import Loading from "../../components/Loading";
 
@@ -18,11 +19,13 @@ import axios from "../../config/axios";
 const Manager = () => {
   const { user, loading: userLoading } = useContext(UserContext);
   const [popupOpen, setPopupOpen] = useState(false);
+  const [tasksPopupOpen, setTasksPopupOpen] = useState(false);
   const [pswdPopup, setPswdPopup] = useState(false);
   const [addLoading, setAddLoading] = useState(false);
   const [reload, setReload] = useState(false);
   const [oompas, setOoompas] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [oompaLoompaData, setOompaLoompaData] = useState(null);
   const [locationNew, setLocationNew] = useState("");
   const [options, setOptions] = useState([
     { value: "Reception", label: "Reception" },
@@ -37,9 +40,11 @@ const Manager = () => {
   ]);
   const popupRef = useRef();
   const pswdPopupRef = useRef();
+  const tasksPopupOpenRef = useRef();
 
   useOnClickOutside(popupRef, () => setPopupOpen(false));
   useOnClickOutside(pswdPopupRef, () => setPswdPopup(false));
+  useOnClickOutside(tasksPopupOpenRef, () => setTasksPopupOpen(false));
 
   useEffect(async () => {
     if (!userLoading) {
@@ -71,7 +76,8 @@ const Manager = () => {
       <div className={styles["popup"]}>
         <button
           className={styles["close-button"]}
-          onClick={() => setPopupOpen(false)}>
+          onClick={() => setPopupOpen(false)}
+        >
           <PlusIcon className={styles["close-button__icon"]} />
         </button>
         <h1 className={styles.main__heading} style={{ marginTop: "20px" }}>
@@ -82,7 +88,8 @@ const Manager = () => {
           onSubmit={(e) => {
             e.preventDefault();
             onAddLoompa(name, email, password);
-          }}>
+          }}
+        >
           <input
             className={styles["popup__input"]}
             placeholder="Name"
@@ -112,7 +119,9 @@ const Manager = () => {
             <button
               className="button-primary"
               type="submit"
-              style={{ width: "120px" }}>
+              style={{ width: "120px" }}
+              disabled={addLoading}
+            >
               {addLoading ? "Adding.." : "Add"}
             </button>
           </div>
@@ -141,7 +150,8 @@ const Manager = () => {
         className={cx(styles["oompa-card"], {
           [styles["oompa-card--closed"]]: !open,
           [styles["oompa-card--open"]]: open,
-        })}>
+        })}
+      >
         <div className={styles["oompa-card__closed-container"]}>
           <h2 className={styles["oompa-card__name"]}>{name}</h2>
           <p className={styles["oompa-card__email"]}>{email}</p>
@@ -150,7 +160,8 @@ const Manager = () => {
             className="transparent-button"
             onClick={(e) => {
               setOpen(!open), console.log(open);
-            }}>
+            }}
+          >
             <ChevronDown
               className={cx(styles["oompa-card__open-button"], {
                 [styles["oompa-card__open-button--closed"]]: !open,
@@ -162,7 +173,8 @@ const Manager = () => {
         <div
           className={cx(styles["oompa-card__open-container"], {
             [styles["oompa-card__open-container--visible"]]: open,
-          })}>
+          })}
+        >
           <div className={styles["oompa-card__stat-container"]}>
             <p>Manager</p>
             <div style={{ flexGrow: 1 }}></div>
@@ -202,10 +214,18 @@ const Manager = () => {
             <button
               className="button-primary"
               onClick={() => setPswdPopup(true)}
-              style={{ marginLeft: "12px" }}>
+              style={{ marginLeft: "12px" }}
+            >
               Change Password
             </button>
-            <button className="button-primary" style={{ marginLeft: "12px" }}>
+            <button
+              className="button-primary"
+              style={{ marginLeft: "12px" }}
+              onClick={(e) => {
+                setOompaLoompaData(oompa);
+                setTasksPopupOpen(true);
+              }}
+            >
               View Tasks
             </button>
             <button
@@ -216,7 +236,8 @@ const Manager = () => {
                 await axios.delete(`/oompaloompas/${_id}`);
                 setReload(!reload);
                 setDeleteLoading(false);
-              }}>
+              }}
+            >
               {deleteLoading ? "Removing.." : "Remove"}
             </button>
           </div>
@@ -243,7 +264,8 @@ const Manager = () => {
               flexGrow: 1,
               justifyContent: "center",
               alignItems: "center",
-            }}>
+            }}
+          >
             <Loading />
           </div>
         ) : (
@@ -263,6 +285,9 @@ const Manager = () => {
       </Popup>
       <Popup popupState={pswdPopup} ref={pswdPopupRef}>
         <ChangePassPopup />
+      </Popup>
+      <Popup popupState={tasksPopupOpen} ref={tasksPopupOpenRef}>
+        <TasksPopup oompaLoompa={oompaLoompaData} />
       </Popup>
     </Layout>
   );

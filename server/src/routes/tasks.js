@@ -9,7 +9,7 @@ router.get("/", auth, async (req, res) => {
   const userId = req.user.id;
   const user = await User.findOne({ _id: userId });
 
-  res.send(user.tasks);
+  res.send({ success: true, tasks: user.tasks });
 });
 
 router.post("/complete/:taskId", auth, async (req, res) => {
