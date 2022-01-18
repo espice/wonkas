@@ -38,8 +38,6 @@ const Manager = () => {
     { value: "Storage", label: "Storage" },
     { value: "Supply", label: "Supply" },
   ]);
-  const [selectedId, setSelectedId] = useState("");
-
   const popupRef = useRef();
   const pswdPopupRef = useRef();
   const tasksPopupOpenRef = useRef();
@@ -132,78 +130,8 @@ const Manager = () => {
     );
   };
 
-  const ChangePassPopup = () => {
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(false);
-    const [pass1, setPass1] = useState("");
-    const [pass2, setPass2] = useState("");
-
-    async function changepswd() {
-      setLoading(true);
-      setError(false);
-      if (pass1 != pass2) {
-        setError(true);
-        setLoading(false);
-        return;
-      }
-      const res = await axios.put("/auth/changePassword", {
-        newPass: pass1,
-        id: selectedId,
-      });
-      setLoading(false);
-      setPswdPopup(false);
-    }
-
-    return (
-      <div className={styles["popup"]}>
-        <button
-          className={styles["close-button"]}
-          onClick={() => setPswdPopup(false)}
-        >
-          <PlusIcon className={styles["close-button__icon"]} />
-        </button>
-        <h1 className={styles.main__heading} style={{ marginTop: "20px" }}>
-          <span>Change Password</span>
-        </h1>
-        <form
-          className={styles["popup__form"]}
-          onSubmit={async (e) => {
-            e.preventDefault();
-            await changepswd();
-          }}
-        >
-          <input
-            className={styles["popup__input"]}
-            placeholder="New Password"
-            type="password"
-            required={true}
-            value={pass1}
-            onChange={(e) => setPass1(e.target.value)}
-          />
-          <input
-            className={styles["popup__input"]}
-            placeholder="Confirm Password"
-            type="password"
-            required={true}
-            value={pass2}
-            onChange={(e) => setPass2(e.target.value)}
-          />
-          <div className={styles["popup__error"]}>
-            {error && "Passwords do not match!"}
-          </div>
-          <div className={styles["popup__form__submit-group"]}>
-            <button
-              className="button-primary"
-              type="submit"
-              style={{ width: "120px" }}
-              disabled={loading}
-            >
-              {loading ? "Changing.." : "Change"}
-            </button>
-          </div>
-        </form>
-      </div>
-    );
+  const ChangePassPopup = ({ id }) => {
+    return <div></div>;
   };
 
   const OompaCard = ({ oompa }) => {
@@ -285,10 +213,7 @@ const Manager = () => {
           <div className={styles["oompa-card__action-btn-container"]}>
             <button
               className="button-primary"
-              onClick={() => {
-                setSelectedId(_id);
-                setPswdPopup(true);
-              }}
+              onClick={() => setPswdPopup(true)}
               style={{ marginLeft: "12px" }}
             >
               Change Password
@@ -361,7 +286,7 @@ const Manager = () => {
       <Popup popupState={pswdPopup} ref={pswdPopupRef}>
         <ChangePassPopup />
       </Popup>
-      <Popup popupState={tasksPopupOpen} ref={tasksPopupOpenRef}>
+      <Popup popupState={tasksPopupOpen} ref={tasksPopupOpenRef} center>
         <TasksPopup oompaLoompa={oompaLoompaData} />
       </Popup>
     </Layout>
