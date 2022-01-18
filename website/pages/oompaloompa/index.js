@@ -26,7 +26,7 @@ const OompaLoompa = () => {
       setTasks(res.data);
       const cTasks = [];
       const iTasks = [];
-      res.data.forEach((task) => {
+      res.data.tasks.forEach((task) => {
         if (task.completed) {
           cTasks.push(task);
         } else {
