@@ -2,6 +2,12 @@
   background-color: #f9f9f9;
   overflow: hidden;
   max-height: 100%;
+  display: flex;
+  flex-flow: column;
+
+  min-width: 600px;
+  height: 69vh;
+
   &__header {
     display: flex;
     flex-flow: column;
@@ -31,16 +37,98 @@
   }
 
   &__content {
-    margin-top: 20px;
-    &__tasks {
-      &__empty {
-        width: fit-content;
-        margin: auto;
+    margin-top: 50px;
+    display: flex;
+    flex-flow: column;
+    height: 100%;
 
-        p {
-          color: #52606d;
+    overflow-y: auto;
+
+    &__empty {
+      width: fit-content;
+      margin: auto auto auto auto;
+      display: flex;
+      flex-flow: column;
+      gap: 10px;
+
+      &__icon {
+        content: url("https://api.iconify.design/fluent/emoji-sad-20-filled.svg?color=%23323f4b&height=64");
+        margin: auto;
+      }
+
+      p {
+        color: #323f4b;
+        font-weight: 600;
+      }
+    }
+    &__tasks {
+      height: 100%;
+      display: flex;
+      flex-flow: column;
+      gap: 20px;
+
+      &__header {
+        color: #616e7c;
+        font-size: 15px;
+        font-weight: 500;
+      }
+
+      &__task {
+        display: flex;
+        width: 100%;
+        &__description {
+          font-size: 18px;
+          color: #3e4c59;
           font-weight: 600;
         }
+
+        &__delete {
+          margin-left: auto;
+          cursor: pointer;
+          content: url("https://api.iconify.design/bx/bxs-trash-alt.svg?color=%233e4c59&height=24");
+
+          &:hover {
+            content: url("https://api.iconify.design/bx/bxs-trash-alt.svg?color=%232A343D&height=24");
+          }
+        }
+      }
+    }
+  }
+
+  &__footer {
+    margin-top: 30px;
+    display: flex;
+    gap: 10px;
+
+    &__input {
+      padding: 10px;
+      border: 2px solid #e4e7eb;
+      border-radius: 6px;
+
+      outline: none;
+      font-size: 18px;
+      width: 92%;
+      background-color: transparent;
+      color: #323f4b;
+      transition: all 0.2s;
+
+      ::placeholder {
+        color: #323f4b;
+        font-weight: 400;
+        font-size: 18px;
+      }
+    }
+
+    &__new {
+      content: url("https://api.iconify.design/teenyicons/tick-solid.svg?color=%235C0099");
+      width: 20px;
+      height: 20px;
+      margin: auto 0 auto auto;
+      transition: all 0.2s;
+
+      &:hover {
+        cursor: pointer;
+        transform: scale(1.03);
       }
     }
   }

@@ -180,7 +180,7 @@ export default function Store() {
             })}
           </div>
         </div>
-        <Popup ref={popupRef} popupState={popupOpen}>
+        <Popup ref={popupRef} popupState={popupOpen} center>
           <CheckoutPopup />
         </Popup>
       </Layout>

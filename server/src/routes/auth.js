@@ -1,6 +1,7 @@
 const { Router } = require("express");
 const jwt = require("jsonwebtoken");
 const auth = require("@middleware/auth");
+const managerOnly = require("@middleware/managerOnly");
 const router = Router();
 const bcrypt = require("bcrypt");
 
@@ -60,12 +61,23 @@ router.get("/me", auth, async (req, res) => {
   if (!req.user)
     return res.send({ success: false, message: "Invalid Session" });
 
-  const user = await User.findOne({ _id: req.user.id }).select("-password -tasks");
+  const user = await User.findOne({ _id: req.user.id }).select(
+    "-password -tasks"
+  );
   res.send({ success: true, user: user });
 });
 
 router.post("/logout", auth, (req, res) => {
   res.clearCookie("token").send({ success: true });
+});
+
+router.put("/changePassword", auth, managerOnly, async (req, res) => {
+  const newPass = req.body.newPass;
+  const hashed = await bcrypt.hash(newPass, 15);
+
+  await User.findOneAndUpdate({ _id: req.body.id }, { password: hashed });
+
+  res.send({ success: true });
 });
 
 module.exports = router;

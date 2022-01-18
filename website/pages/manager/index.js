@@ -286,7 +286,7 @@ const Manager = () => {
       <Popup popupState={pswdPopup} ref={pswdPopupRef}>
         <ChangePassPopup />
       </Popup>
-      <Popup popupState={tasksPopupOpen} ref={tasksPopupOpenRef}>
+      <Popup popupState={tasksPopupOpen} ref={tasksPopupOpenRef} center>
         <TasksPopup oompaLoompa={oompaLoompaData} />
       </Popup>
     </Layout>
