@@ -1,0 +1,126 @@
+.popup {
+  width: 100%;
+
+  &__header {
+    display: flex;
+    flex-flow: column;
+    gap: 10px;
+
+    &__close {
+      content: url("https://api.iconify.design/eva/close-fill.svg?color=%239210CF&width=28&height=28");
+      width: 28px;
+      height: 28px;
+      margin-left: -5px;
+
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    &__heading {
+      color: #323f4b;
+      font-weight: 600;
+      font-size: 30px;
+    }
+
+    p {
+      color: #52606d;
+      font-size: 500;
+    }
+  }
+
+  &__content {
+    margin-top: 30px;
+    display: flex;
+    flex-flow: column;
+    gap: 20px;
+    width: 100%;
+
+    &__salary {
+      display: flex;
+      width: 100%;
+
+      &__input {
+        padding: 15px;
+        width: 87%;
+        border-radius: 6px;
+        background-color: transparent;
+
+        border: 3px solid transparent;
+        outline: none;
+        font-size: 20px;
+        transition: all 0.2s;
+
+        &:focus {
+          border-color: var(--primary);
+        }
+      }
+      &__bean {
+        width: 32px;
+        height: 32px;
+        margin: auto 0 auto auto;
+      }
+    }
+
+    &__bonus {
+      display: grid;
+      width: 100%;
+
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1.3fr));
+
+      &__card {
+        display: flex;
+        flex-flow: column;
+        width: 120px;
+        height: 120px;
+        background-color: rgba(#5c0099, 0.7);
+        text-align: center;
+        border-radius: 6px;
+        transition: all 0.2s;
+
+        &__icon {
+          margin: auto;
+          width: 32px;
+          height: 32px;
+        }
+
+        &__label {
+          color: white;
+          font-size: 20px;
+          font-weight: 600;
+          margin: auto;
+        }
+
+        &:hover {
+          cursor: pointer;
+          background-color: rgba(#5c0099, 0.8);
+        }
+
+        &__selected {
+          background-color: rgba(#5c0099, 0.8);
+
+          display: flex;
+          flex-flow: column;
+          width: 120px;
+          height: 120px;
+          text-align: center;
+          border-radius: 6px;
+          transition: all 0.2s;
+
+          &__icon {
+            margin: auto;
+            width: 32px;
+            height: 32px;
+          }
+
+          &__label {
+            color: white;
+            font-size: 20px;
+            font-weight: 600;
+            margin: auto;
+          }
+        }
+      }
+    }
+  }
+}

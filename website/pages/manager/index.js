@@ -18,6 +18,7 @@ import axios from "../../config/axios";
 const Manager = () => {
   const { user, loading: userLoading } = useContext(UserContext);
   const [popupOpen, setPopupOpen] = useState(false);
+  const [pswdPopup, setPswdPopup] = useState(false);
   const [addLoading, setAddLoading] = useState(false);
   const [reload, setReload] = useState(false);
   const [oompas, setOoompas] = useState([]);
@@ -35,8 +36,10 @@ const Manager = () => {
     { value: 'Supply', label: 'Supply' },
   ]);
   const popupRef = useRef();
+  const pswdPopupRef = useRef();
 
   useOnClickOutside(popupRef, () => setPopupOpen(false));
+  useOnClickOutside(pswdPopupRef, () => setPswdPopup(false))
 
   useEffect(async () => {
     if (!userLoading) {
@@ -121,6 +124,10 @@ const Manager = () => {
     );
   };
 
+  const ChangePassPopup = ({ id }) => {
+    return <div></div>;
+  };
+
   const OompaCard = ({ oompa }) => {
     const { name, email, isManager, _id, location } = oompa;
     const [open, setOpen] = useState(false);
@@ -185,7 +192,7 @@ const Manager = () => {
               }}/>
           </div>
           <div className={styles["oompa-card__action-btn-container"]}>
-            <button className="button-primary" style={{ marginLeft: "12px" }}>
+            <button className="button-primary" onClick={() => setPswdPopup(true)} style={{ marginLeft: "12px" }}>
               Change Password
             </button>
             <button className="button-primary" style={{ marginLeft: "12px" }}>
@@ -246,6 +253,9 @@ const Manager = () => {
       <Popup ref={popupRef} popupState={popupOpen}>
         <NewOompaPopup />
       </Popup>
+      <Popup popupState={pswdPopup} ref={pswdPopupRef}>
+          <ChangePassPopup  />
+        </Popup>
     </Layout>
   );
 };

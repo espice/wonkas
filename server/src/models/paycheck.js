@@ -20,13 +20,7 @@ const paycheckSchema = mongoose.Schema({
     ),
   },
   paycheckHistory: {
-    type: [
-      {
-        amount: Number,
-        date: Date,
-
-      },
-    ],
+    type: Array,
     default: [],
   },
 });
