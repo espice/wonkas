@@ -127,7 +127,7 @@ const Paychecks = () => {
         </div>
 
         <Popup popupState={isPayPopupOpen} ref={paypopupRef} center>
-          <PayCheckPopup userId={popupUser} />
+          <PayCheckPopup userId={popupUser} setOpen={setIsPayPopupOpen} />
         </Popup>
 
         <Popup
