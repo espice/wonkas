@@ -2,10 +2,12 @@ import { useState, useEffect } from "react";
 import axios from "../../config/axios";
 import styles from "./index.module.scss";
 import BeanIcon from "../../public/icons/bean.svg";
+import classNames from "classnames/bind";
+const cx = classNames.bind(styles);
 const PayCheckPopup = ({ userId }) => {
   const [payment, setPayment] = useState(150);
   const [total, setTotal] = useState(0);
-  const [bonusSelected, setBonusSelected] = useState(false);
+  const [bonusSelected, setBonusSelected] = useState(0);
 
   useEffect(async () => {
     const response = await axios.get("/api/total/");
@@ -14,14 +16,12 @@ const PayCheckPopup = ({ userId }) => {
     setTotal(response.data.total.amount);
   }, []);
 
-  function submitHandler() {
-    /*axios.post("/api/total/update", {
-            amount: total - payment
-        }).then((value) => {
-            console.log(value)
-        })
-        */
-  }
+  const submitHandler = async () => {
+    const response = await axios.post("/api/paycheck/pay", {
+      userId: userId._id,
+      amount: parseInt(payment) + parseInt(bonusSelected),
+    });
+  };
   return (
     <div className={styles.popup}>
       <div className={styles.popup__header}>
@@ -31,10 +31,7 @@ const PayCheckPopup = ({ userId }) => {
       </div>
 
       <div className={styles.popup__content}>
-        <form
-          onSubmit={submitHandler()}
-          className={styles.popup__content__salary}
-        >
+        <form className={styles.popup__content__salary}>
           <input
             type="number"
             value={payment}
@@ -54,6 +51,9 @@ const PayCheckPopup = ({ userId }) => {
                 : styles.popup__content__bonus__card
             }
             onClick={(e) => {
+              if (bonusSelected == 10) {
+                return setBonusSelected(0);
+              }
               setBonusSelected(10);
             }}
           >
@@ -61,16 +61,69 @@ const PayCheckPopup = ({ userId }) => {
             <p className={styles.popup__content__bonus__card__label}>+10</p>
           </div>
 
-          <div className={styles.popup__content__bonus__card}>
+          <div
+            className={
+              bonusSelected == 50
+                ? styles.popup__content__bonus__card__selected
+                : styles.popup__content__bonus__card
+            }
+            onClick={(e) => {
+              if (bonusSelected == 50) {
+                return setBonusSelected(0);
+              }
+              setBonusSelected(50);
+            }}
+          >
             <BeanIcon className={styles.popup__content__bonus__card__icon} />
             <p className={styles.popup__content__bonus__card__label}>+50</p>
           </div>
 
-          <div className={styles.popup__content__bonus__card}>
+          <div
+            className={
+              bonusSelected == 100
+                ? styles.popup__content__bonus__card__selected
+                : styles.popup__content__bonus__card
+            }
+            onClick={(e) => {
+              if (bonusSelected == 100) {
+                return setBonusSelected(0);
+              }
+              setBonusSelected(100);
+            }}
+          >
             <BeanIcon className={styles.popup__content__bonus__card__icon} />
             <p className={styles.popup__content__bonus__card__label}>+100</p>
           </div>
+
+          <div
+            className={
+              bonusSelected == 500
+                ? styles.popup__content__bonus__card__selected
+                : styles.popup__content__bonus__card
+            }
+            onClick={(e) => {
+              if (bonusSelected == 500) {
+                setBonusSelected(0);
+              } else {
+                setBonusSelected(500);
+              }
+            }}
+          >
+            <BeanIcon className={styles.popup__content__bonus__card__icon} />
+            <p className={styles.popup__content__bonus__card__label}>+500</p>
+          </div>
         </div>
+      </div>
+
+      <div className={styles.popup__footer}>
+        <button
+          className={cx("button-primary", styles.popup__footer__button)}
+          onClick={(e) => {
+            submitHandler();
+          }}
+        >
+          Pay {userId.name}
+        </button>
       </div>
     </div>
   );

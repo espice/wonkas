@@ -44,3 +44,11 @@ export const formatLong = (date) => {
     month[formattedDate.getMonth()]
   } ${formattedDate.getDate()}`;
 };
+
+export const formatMonthShort = (date) => {
+  let formattedDate = new Date(date);
+
+  return `${formattedDate.getDate()} 
+    ${monthShort[formattedDate.getMonth()]}
+    `;
+};
