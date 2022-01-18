@@ -94,7 +94,7 @@ export default function Chat() {
   }, [messages]);
 
   return (
-    <Layout>
+    <Layout title="Chat">
       <SideNav />
       <div className={styles.main}>
         <div className={styles.main__header}>

@@ -3,17 +3,20 @@ import styles from "../../styles/pages/store/index.module.scss";
 import { useEffect, useState, useRef } from "react";
 import axios from "../../config/axios";
 import { Popup, useOnClickOutside } from "../../components/Popup";
+import Loader from "../../components/Loading";
 import styles2 from "../../styles/pages/manager/home.module.scss";
+import { signOut } from "next-auth/client";
 export default function Store() {
   const [productList, setProductList] = useState([]);
   const [cartItems, setCartItems] = useState([]);
   const [reload, setReload] = useState(false);
   const [popupOpen, setPopupOpen] = useState(false);
-
+  const [loading, setLoading] = useState(false);
   const popupRef = useRef();
   useOnClickOutside(popupRef, () => setPopupOpen(false));
 
   useEffect(async () => {
+    setLoading(true);
     const productsData = await axios.get("/products");
     const products = productsData.data.products;
     setProductList(products);
@@ -25,7 +28,17 @@ export default function Store() {
     }
 
     setReload(false);
+    setLoading(false);
   }, [reload]);
+
+  const logout = async () => {
+    await signOut();
+
+    const response = await axios.post("/auth/logout");
+
+    if (!response.data.success) return alert("Something went wrong");
+    window.location.reload();
+  };
 
   const CheckoutPopup = () => {
     let _totalQty = 0;
@@ -42,11 +55,14 @@ export default function Store() {
             alignItems: "center",
             justifyContent: "space-evenly",
             height: "150px",
-          }}>
+          }}
+        >
           <p style={{ fontSize: 20 + "px" }}>
             <span style={{ fontWeight: 600 }}>Total Amount: </span>$
             {_totalQty * 10}
           </p>
+          {console.log(loading)}
+          {loading ? <Loader /> : null}
           <button
             style={{
               padding: "5px 10px",
@@ -61,7 +77,8 @@ export default function Store() {
               localStorage.setItem("cart", "[]");
               setPopupOpen(false);
               setReload(true);
-            }}>
+            }}
+          >
             Place Order
           </button>
         </div>
@@ -73,7 +90,7 @@ export default function Store() {
     return <Layout />;
   } else {
     return (
-      <Layout>
+      <Layout title="Store">
         <div className={styles["container"]}>
           <div>
             <h1>Wonka's</h1>
@@ -85,6 +102,14 @@ export default function Store() {
               className={styles["cartIcon"]}
               src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/00/Shopping_cart_font_awesome.svg/1024px-Shopping_cart_font_awesome.svg.png"
             />
+            <button
+              className="button-red"
+              onClick={(e) => {
+                logout();
+              }}
+            >
+              Log Out
+            </button>
           </div>
 
           <div>
@@ -125,7 +150,8 @@ export default function Store() {
                           );
 
                           setReload(true);
-                        }}>
+                        }}
+                      >
                         -
                       </button>
                       <h3>
@@ -147,7 +173,8 @@ export default function Store() {
                           );
 
                           setReload(true);
-                        }}>
+                        }}
+                      >
                         +
                       </button>
                     </div>
@@ -159,7 +186,8 @@ export default function Store() {
                         localStorage.setItem("cart", JSON.stringify(cartItems));
 
                         setReload(true);
-                      }}>
+                      }}
+                    >
                       Add to cart
                     </button>
                   )}

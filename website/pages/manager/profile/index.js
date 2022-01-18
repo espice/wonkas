@@ -17,7 +17,7 @@ export default function Profile() {
     }
   };
   return (
-    <Layout>
+    <Layout title="Profile">
       <SideNav />
 
       <div className={styles.container}>
