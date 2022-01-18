@@ -61,8 +61,7 @@ const Popup = React.forwardRef((props, ref) => {
           [styles["popup--center"]]: center,
         })}
         ref={ref}
-        {...others}
-      >
+        {...others}>
         {heading ? <h1 className={styles.popup__heading}>{heading}</h1> : null}
         {children}
       </div>

@@ -25,21 +25,21 @@ const Manager = () => {
   const [loading, setLoading] = useState(true);
   const [locationNew, setLocationNew] = useState("");
   const [options, setOptions] = useState([
-    { value: 'Reception', label: 'Reception' },
-    { value: 'Elevator', label: 'Great Glass Elevator' },
-    { value: 'Nut Room', label: 'Nut Room' },
-    { value: 'Inventing Room', label: 'Inventing Room' },
-    { value: 'Testing Room', label: 'Testing Room' },
-    { value: 'Chocolate Room', label: 'Chocolate Room' },
-    { value: 'Chocolate River', label: 'Chocolate River' },
-    { value: 'Storage', label: 'Storage' },
-    { value: 'Supply', label: 'Supply' },
+    { value: "Reception", label: "Reception" },
+    { value: "Elevator", label: "Great Glass Elevator" },
+    { value: "Nut Room", label: "Nut Room" },
+    { value: "Inventing Room", label: "Inventing Room" },
+    { value: "Testing Room", label: "Testing Room" },
+    { value: "Chocolate Room", label: "Chocolate Room" },
+    { value: "Chocolate River", label: "Chocolate River" },
+    { value: "Storage", label: "Storage" },
+    { value: "Supply", label: "Supply" },
   ]);
   const popupRef = useRef();
   const pswdPopupRef = useRef();
 
   useOnClickOutside(popupRef, () => setPopupOpen(false));
-  useOnClickOutside(pswdPopupRef, () => setPswdPopup(false))
+  useOnClickOutside(pswdPopupRef, () => setPswdPopup(false));
 
   useEffect(async () => {
     if (!userLoading) {
@@ -71,8 +71,7 @@ const Manager = () => {
       <div className={styles["popup"]}>
         <button
           className={styles["close-button"]}
-          onClick={() => setPopupOpen(false)}
-        >
+          onClick={() => setPopupOpen(false)}>
           <PlusIcon className={styles["close-button__icon"]} />
         </button>
         <h1 className={styles.main__heading} style={{ marginTop: "20px" }}>
@@ -83,8 +82,7 @@ const Manager = () => {
           onSubmit={(e) => {
             e.preventDefault();
             onAddLoompa(name, email, password);
-          }}
-        >
+          }}>
           <input
             className={styles["popup__input"]}
             placeholder="Name"
@@ -114,8 +112,7 @@ const Manager = () => {
             <button
               className="button-primary"
               type="submit"
-              style={{ width: "120px" }}
-            >
+              style={{ width: "120px" }}>
               {addLoading ? "Adding.." : "Add"}
             </button>
           </div>
@@ -133,7 +130,7 @@ const Manager = () => {
     const [open, setOpen] = useState(false);
     const [manager, setManager] = useState(isManager);
     const [deleteLoading, setDeleteLoading] = useState(false);
-    console.log(location)
+    console.log(location);
     async function updateManagerState() {
       setManager(!manager);
       await axios.put(`/oompaloompas/manager/${_id}`);
@@ -144,13 +141,16 @@ const Manager = () => {
         className={cx(styles["oompa-card"], {
           [styles["oompa-card--closed"]]: !open,
           [styles["oompa-card--open"]]: open,
-        })}
-      >
+        })}>
         <div className={styles["oompa-card__closed-container"]}>
           <h2 className={styles["oompa-card__name"]}>{name}</h2>
           <p className={styles["oompa-card__email"]}>{email}</p>
           <div style={{ flexGrow: 1 }}></div>
-          <button className="transparent-button" onClick={(e) => {setOpen(!open), console.log(open)}}>
+          <button
+            className="transparent-button"
+            onClick={(e) => {
+              setOpen(!open), console.log(open);
+            }}>
             <ChevronDown
               className={cx(styles["oompa-card__open-button"], {
                 [styles["oompa-card__open-button--closed"]]: !open,
@@ -162,8 +162,7 @@ const Manager = () => {
         <div
           className={cx(styles["oompa-card__open-container"], {
             [styles["oompa-card__open-container--visible"]]: open,
-          })}
-        >
+          })}>
           <div className={styles["oompa-card__stat-container"]}>
             <p>Manager</p>
             <div style={{ flexGrow: 1 }}></div>
@@ -180,19 +179,30 @@ const Manager = () => {
           <div className={styles["oompa-card__stat-container"]}>
             <p>Assigned To</p>
             <div style={{ flexGrow: 1 }}></div>
-    
-              <Select options={options} defaultValue={location} placeholder={location} onChange={(e) => {setLocationNew(e.value)
-              axios.post("/api/locations/updateuser", {
-                oompaId: _id,
-                location: e.value
-              }).then(value => {
-                console.log(value.data)
-                setReload(!reload)
-              })
-              }}/>
+
+            <Select
+              options={options}
+              defaultValue={location}
+              placeholder={location}
+              onChange={(e) => {
+                setLocationNew(e.value);
+                axios
+                  .post("/api/locations/updateuser", {
+                    oompaId: _id,
+                    location: e.value,
+                  })
+                  .then((value) => {
+                    console.log(value.data);
+                    setReload(!reload);
+                  });
+              }}
+            />
           </div>
           <div className={styles["oompa-card__action-btn-container"]}>
-            <button className="button-primary" onClick={() => setPswdPopup(true)} style={{ marginLeft: "12px" }}>
+            <button
+              className="button-primary"
+              onClick={() => setPswdPopup(true)}
+              style={{ marginLeft: "12px" }}>
               Change Password
             </button>
             <button className="button-primary" style={{ marginLeft: "12px" }}>
@@ -206,8 +216,7 @@ const Manager = () => {
                 await axios.delete(`/oompaloompas/${_id}`);
                 setReload(!reload);
                 setDeleteLoading(false);
-              }}
-            >
+              }}>
               {deleteLoading ? "Removing.." : "Remove"}
             </button>
           </div>
@@ -234,8 +243,7 @@ const Manager = () => {
               flexGrow: 1,
               justifyContent: "center",
               alignItems: "center",
-            }}
-          >
+            }}>
             <Loading />
           </div>
         ) : (
@@ -254,8 +262,8 @@ const Manager = () => {
         <NewOompaPopup />
       </Popup>
       <Popup popupState={pswdPopup} ref={pswdPopupRef}>
-          <ChangePassPopup  />
-        </Popup>
+        <ChangePassPopup />
+      </Popup>
     </Layout>
   );
 };
