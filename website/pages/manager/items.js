@@ -38,7 +38,8 @@ const Manager = () => {
       <div className={styles["popup"]}>
         <button
           className={styles["close-button"]}
-          onClick={() => setPopupOpen(false)}>
+          onClick={() => setPopupOpen(false)}
+        >
           <PlusIcon className={styles["close-button__icon"]} />
         </button>
 
@@ -62,7 +63,8 @@ const Manager = () => {
             setAddLoading(false);
             setPopupOpen(false);
             window.location.reload();
-          }}>
+          }}
+        >
           <input
             className={styles["popup__input"]}
             placeholder="Name"
@@ -99,7 +101,8 @@ const Manager = () => {
             id="newItemImgInputTrigger"
             onClick={() => {
               document.getElementById("newItemImgInput").click();
-            }}>
+            }}
+          >
             Upload Image
             <img
               style={{ height: 60 + "%", filter: "contrast(0%)" }}
@@ -127,7 +130,8 @@ const Manager = () => {
             <button
               className="button-primary"
               type="submit"
-              style={{ width: "120px" }}>
+              style={{ width: "120px" }}
+            >
               {addLoading ? "Adding.." : "Add Item"}
             </button>
           </div>
@@ -151,17 +155,22 @@ const Manager = () => {
             return (
               <div
                 key={product._id}
-                className={styles["main__productList__productCard"]}>
+                className={styles["main__productList__productCard"]}
+              >
                 <img src={product.picture} alt={product.name} />
-                <h1>{product.name}</h1>
+                <div style={{margin: "0"}}>
+                  <h1>{product.name}</h1>
+                </div>
                 <div>
                   Price <span>${product.price}</span>
                 </div>
                 <button
+                  className="button-red"
                   onClick={() => {
                     axios.post("/products/delete", { id: product._id });
                     window.location.reload();
-                  }}>
+                  }}
+                >
                   Remove Item
                 </button>
               </div>
