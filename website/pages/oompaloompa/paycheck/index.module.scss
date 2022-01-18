@@ -43,6 +43,7 @@
     margin-top: 20px;
     display: flex;
     flex-flow: column;
+    gap: 30px;
 
     width: 100%;
 
@@ -69,24 +70,67 @@
           display: flex;
           width: 100%;
 
+          @media screen and (max-width: 600px) {
+            flex-flow: column;
+            gap: 20px;
+          }
+
           &__label {
             gap: 10px;
             display: flex;
+            white-space: nowrap;
+            width: fit-content;
+
+            @media screen and (max-width: 600px) {
+              margin: auto;
+            }
 
             p {
               margin: auto;
               color: #3e4c59;
               font-weight: 600;
               font-size: 20px;
+
+              white-space: nowrap;
+            }
+
+            svg {
+              margin: auto;
+            }
+
+            &__secondary {
+              margin: auto;
+              font-size: 15px;
+              font-weight: 600;
+              color: #999999;
+              white-space: nowrap;
             }
           }
 
-          &__action {
-            margin-left: auto;
+          &__middle {
+            margin: auto;
+            width: 100%;
+            text-align: center;
 
+            p {
+              font-size: 15px;
+              color: #3e4c59;
+              font-weight: 600;
+            }
+          }
+          &__action {
+            margin: auto 0 auto auto;
+
+            @media screen and (max-width: 600px) {
+              margin: auto;
+            }
             &__gray {
               color: #999999;
               font-weight: 500;
+            }
+
+            &__action {
+              white-space: nowrap;
             }
           }
         }

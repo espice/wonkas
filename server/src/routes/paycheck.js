@@ -69,6 +69,7 @@ router.post("/pay", auth, async (req, res) => {
     date: new Date(),
     bonus: req.body.amount - paycheck.salary,
     collected: false,
+    id: Math.random().toString(36).slice(2),
   });
 
   await paycheck.save();
@@ -90,8 +91,18 @@ router.post("/collect", auth, async (req, res) => {
     return res.send({ success: false, message: "Invalid Credentials" });
   }
 
-  const paycheckObj = await Paycheck.findOne({ user: id });
+  let paycheckObj = await Paycheck.findOne({ user: id });
 
-  console.log(paycheckObj);
+  paycheckObj.paycheckHistory.map((paycheck) => {
+    if (paycheck.id == req.body.paycheckId) {
+      paycheck.collected = true;
+    }
+  });
+
+  const newPaycheckObj = await Paycheck.findOneAndUpdate(
+    { user: id },
+    paycheckObj
+  );
+  return res.send({ success: true, paycheck: paycheckObj });
 });
 module.exports = router;

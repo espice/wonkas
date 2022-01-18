@@ -1,73 +1,38 @@
 import styles from "./index.module.scss";
-import classNames from "classnames/bind";
-const cx = classNames.bind(styles);
+import Loading from "../../Loading";
+import { useState, useEffect } from "react";
+import axios from "../../../config/axios";
+export default function TasksPopup({ setOpen, oompaLoompa }) {
+  const [tasks, setTasks] = useState([]);
 
-import React, { useEffect, useCallback } from "react";
-import ClientOnlyPortal from "./ClientOnlyPortal";
+  useEffect(async () => {
+    const response = await axios.get("/tasks/");
+    console.log(response.data.tasks);
+    setTasks(response.data.tasks);
+  }, []);
+  if (oompaLoompa) {
+    return (
+      <div className={styles.popup}>
+        <div className={styles.popup__header}>
+          <div className={styles.popup__header__close} />
+          <h1 className={styles.popup__header__heading}>Tasks</h1>
+          <p>
+            Manage tasks for <b>{oompaLoompa.name}</b>
+          </p>
+        </div>
 
-export default function useOnClickOutside(ref, handler) {
-  const escapeListener = useCallback(
-    (e) => {
-      if (e.key === "Escape") {
-        handler(e);
-      }
-    },
-    [handler]
-  );
-  useEffect(() => {
-    const listener = (event) => {
-      // Do nothing if clicking ref's element or descendent elements
-      if (!ref.current || ref.current.contains(event.target)) {
-        return;
-      }
-
-      handler(event);
-    };
-
-    document.addEventListener("mousedown", listener);
-    document.addEventListener("touchstart", listener);
-    document.addEventListener("keyup", escapeListener);
-
-    return () => {
-      document.removeEventListener("mousedown", listener);
-      document.removeEventListener("touchstart", listener);
-      document.removeEventListener("keyup", escapeListener);
-    };
-  }, [ref, handler, escapeListener]);
-}
-
-const Popup = React.forwardRef((props, ref) => {
-  const {
-    children,
-    heading,
-    popupState,
-    className,
-    noPadding = false,
-    center = false,
-    ...others
-  } = props;
-
-  return (
-    <ClientOnlyPortal selector="#popupContainer">
-      <div
-        className={cx(styles["popup-overlay"], {
-          [styles["popup-overlay--open"]]: popupState,
-        })}
-      />
-      <div
-        className={cx(styles.popup, className, {
-          [styles["popup--open"]]: popupState,
-          [styles["popup--no-padding"]]: noPadding,
-          [styles["popup--center"]]: center,
-        })}
-        ref={ref}
-        {...others}
-      >
-        {heading ? <h1 className={styles.popup__heading}>{heading}</h1> : null}
-        {children}
+        <div className={styles.popup__content}>
+          <div className={styles.popup__content__tasks}>
+            {tasks.length == 0 ? (
+              <div className={styles.popup__content__tasks__empty}>
+                <p>Nishit Jha hasn't been assigned any tasks yet.</p>
+              </div>
+            ) : null}
+          </div>
+        </div>
       </div>
-    </ClientOnlyPortal>
-  );
-});
-
-export { Popup, useOnClickOutside };
+    );
+  } else {
+    return <Loading />;
+  }
+}

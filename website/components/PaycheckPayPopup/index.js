@@ -4,11 +4,11 @@ import styles from "./index.module.scss";
 import BeanIcon from "../../public/icons/bean.svg";
 import classNames from "classnames/bind";
 const cx = classNames.bind(styles);
-const PayCheckPopup = ({ userId }) => {
+const PayCheckPopup = ({ userId, setOpen }) => {
   const [payment, setPayment] = useState(150);
   const [total, setTotal] = useState(0);
   const [bonusSelected, setBonusSelected] = useState(0);
-
+  const [paying, setPaying] = useState(false);
   useEffect(async () => {
     const response = await axios.get("/api/total/");
 
@@ -17,10 +17,18 @@ const PayCheckPopup = ({ userId }) => {
   }, []);
 
   const submitHandler = async () => {
+    setPaying(true);
     const response = await axios.post("/api/paycheck/pay", {
       userId: userId._id,
       amount: parseInt(payment) + parseInt(bonusSelected),
     });
+    if (response.data.success) {
+      setOpen(false);
+      setPaying(false);
+      window.location.reload();
+    } else {
+      setPaying(false);
+    }
   };
   return (
     <div className={styles.popup}>
@@ -121,8 +129,9 @@ const PayCheckPopup = ({ userId }) => {
           onClick={(e) => {
             submitHandler();
           }}
+          disabled={paying}
         >
-          Pay {userId.name}
+          {!paying ? `Pay ${userId.name}` : `Paying...`}
         </button>
       </div>
     </div>

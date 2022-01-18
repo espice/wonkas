@@ -28,6 +28,7 @@
     height: 30px;
     filter: contrast(0%);
     margin-top: 10px;
+    cursor: pointer;
   }
 
   .searchBar {
@@ -70,7 +71,7 @@
 
     & > img {
       width: 175px;
-      margin-bottom: 20px;
+      margin-bottom: 15px;
     }
 
     & > h2 {
@@ -81,33 +82,35 @@
     & > h4 {
       color: #616e7c;
       font-weight: normal;
-      margin-bottom: 20px;
+      margin-bottom: 15px;
+    }
+
+    & > button {
+      padding: 5px 10px;
+      cursor: pointer;
+      background-color: rgba(#5c0099, 20%);
+      color: #5c0099;
+      border: 3px solid #5c0099;
+      border-radius: 3px;
     }
 
     & > div {
       display: flex;
-      width: 100%;
+      width: 50%;
       flex-direction: row;
-      align-items: center;
       justify-content: space-evenly;
+      align-items: center;
 
       & > button {
-        padding: 5px 10px;
+        border: none;
+        background: none;
+        color: #d4af37;
+        font-size: 20px;
         cursor: pointer;
       }
 
-      & > button:nth-child(1) {
-        background-color: rgba(#5c0099, 20%);
+      & > h3 {
         color: #5c0099;
-        border: 3px solid #5c0099;
-        border-radius: 3px;
-      }
-
-      & > button:nth-child(2) {
-        background-color: rgba(#d4af37, 20%);
-        color: #d4af37;
-        border: 3px solid #d4af37;
-        border-radius: 3px;
       }
     }
   }

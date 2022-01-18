@@ -137,6 +137,13 @@
 
     &__button {
       margin-left: auto;
+
+      &__disabled {
+        margin-left: auto;
+        background-color: rgba(#5c0099, 0.1) !important;
+        color: rgba(#5c0099, 0.1) !important;
+        border-color: rgba(#5c0099, 0.1) !important;
+      }
     }
   }
 }

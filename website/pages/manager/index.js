@@ -3,6 +3,7 @@ import Sidebar from "../../components/SideNav";
 import { FAB } from "../../components/Button";
 import PlusIcon from "../../public/icons/plus.svg";
 import ChevronDown from "../../public/icons/chevron_down.svg";
+import TasksPopup from "../../components/Tasks/TasksPopup";
 import { Popup, useOnClickOutside } from "../../components/Popup";
 import Loading from "../../components/Loading";
 
@@ -18,28 +19,32 @@ import axios from "../../config/axios";
 const Manager = () => {
   const { user, loading: userLoading } = useContext(UserContext);
   const [popupOpen, setPopupOpen] = useState(false);
+  const [tasksPopupOpen, setTasksPopupOpen] = useState(false);
   const [pswdPopup, setPswdPopup] = useState(false);
   const [addLoading, setAddLoading] = useState(false);
   const [reload, setReload] = useState(false);
   const [oompas, setOoompas] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [oompaLoompaData, setOompaLoompaData] = useState(null);
   const [locationNew, setLocationNew] = useState("");
   const [options, setOptions] = useState([
-    { value: 'Reception', label: 'Reception' },
-    { value: 'Elevator', label: 'Great Glass Elevator' },
-    { value: 'Nut Room', label: 'Nut Room' },
-    { value: 'Inventing Room', label: 'Inventing Room' },
-    { value: 'Testing Room', label: 'Testing Room' },
-    { value: 'Chocolate Room', label: 'Chocolate Room' },
-    { value: 'Chocolate River', label: 'Chocolate River' },
-    { value: 'Storage', label: 'Storage' },
-    { value: 'Supply', label: 'Supply' },
+    { value: "Reception", label: "Reception" },
+    { value: "Elevator", label: "Great Glass Elevator" },
+    { value: "Nut Room", label: "Nut Room" },
+    { value: "Inventing Room", label: "Inventing Room" },
+    { value: "Testing Room", label: "Testing Room" },
+    { value: "Chocolate Room", label: "Chocolate Room" },
+    { value: "Chocolate River", label: "Chocolate River" },
+    { value: "Storage", label: "Storage" },
+    { value: "Supply", label: "Supply" },
   ]);
   const popupRef = useRef();
   const pswdPopupRef = useRef();
+  const tasksPopupOpenRef = useRef();
 
   useOnClickOutside(popupRef, () => setPopupOpen(false));
-  useOnClickOutside(pswdPopupRef, () => setPswdPopup(false))
+  useOnClickOutside(pswdPopupRef, () => setPswdPopup(false));
+  useOnClickOutside(tasksPopupOpenRef, () => setTasksPopupOpen(false));
 
   useEffect(async () => {
     if (!userLoading) {
@@ -115,6 +120,7 @@ const Manager = () => {
               className="button-primary"
               type="submit"
               style={{ width: "120px" }}
+              disabled={addLoading}
             >
               {addLoading ? "Adding.." : "Add"}
             </button>
@@ -133,7 +139,7 @@ const Manager = () => {
     const [open, setOpen] = useState(false);
     const [manager, setManager] = useState(isManager);
     const [deleteLoading, setDeleteLoading] = useState(false);
-    console.log(location)
+    console.log(location);
     async function updateManagerState() {
       setManager(!manager);
       await axios.put(`/oompaloompas/manager/${_id}`);
@@ -150,7 +156,12 @@ const Manager = () => {
           <h2 className={styles["oompa-card__name"]}>{name}</h2>
           <p className={styles["oompa-card__email"]}>{email}</p>
           <div style={{ flexGrow: 1 }}></div>
-          <button className="transparent-button" onClick={(e) => {setOpen(!open), console.log(open)}}>
+          <button
+            className="transparent-button"
+            onClick={(e) => {
+              setOpen(!open), console.log(open);
+            }}
+          >
             <ChevronDown
               className={cx(styles["oompa-card__open-button"], {
                 [styles["oompa-card__open-button--closed"]]: !open,
@@ -180,22 +191,41 @@ const Manager = () => {
           <div className={styles["oompa-card__stat-container"]}>
             <p>Assigned To</p>
             <div style={{ flexGrow: 1 }}></div>
-    
-              <Select options={options} defaultValue={location} placeholder={location} onChange={(e) => {setLocationNew(e.value)
-              axios.post("/api/locations/updateuser", {
-                oompaId: _id,
-                location: e.value
-              }).then(value => {
-                console.log(value.data)
-                setReload(!reload)
-              })
-              }}/>
+
+            <Select
+              options={options}
+              defaultValue={location}
+              placeholder={location}
+              onChange={(e) => {
+                setLocationNew(e.value);
+                axios
+                  .post("/api/locations/updateuser", {
+                    oompaId: _id,
+                    location: e.value,
+                  })
+                  .then((value) => {
+                    console.log(value.data);
+                    setReload(!reload);
+                  });
+              }}
+            />
           </div>
           <div className={styles["oompa-card__action-btn-container"]}>
-            <button className="button-primary" onClick={() => setPswdPopup(true)} style={{ marginLeft: "12px" }}>
+            <button
+              className="button-primary"
+              onClick={() => setPswdPopup(true)}
+              style={{ marginLeft: "12px" }}
+            >
               Change Password
             </button>
-            <button className="button-primary" style={{ marginLeft: "12px" }}>
+            <button
+              className="button-primary"
+              style={{ marginLeft: "12px" }}
+              onClick={(e) => {
+                setOompaLoompaData(oompa);
+                setTasksPopupOpen(true);
+              }}
+            >
               View Tasks
             </button>
             <button
@@ -254,8 +284,11 @@ const Manager = () => {
         <NewOompaPopup />
       </Popup>
       <Popup popupState={pswdPopup} ref={pswdPopupRef}>
-          <ChangePassPopup  />
-        </Popup>
+        <ChangePassPopup />
+      </Popup>
+      <Popup popupState={tasksPopupOpen} ref={tasksPopupOpenRef}>
+        <TasksPopup oompaLoompa={oompaLoompaData} />
+      </Popup>
     </Layout>
   );
 };

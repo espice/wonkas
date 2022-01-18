@@ -62,7 +62,7 @@ router.put("/manager/:userid", auth, managerOnly, async (req, res) => {
 
 router.delete("/:userid", auth, managerOnly, async (req, res) => {
   await User.deleteOne({ _id: req.params.userid });
-
+  await paycheck.deleteOne({ user: req.params.userid });
   res.send({ success: true });
 });
 
