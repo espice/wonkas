@@ -29,7 +29,7 @@ router.post("/", auth, managerOnly, async (req, res) => {
   });
   const newPaycheck = await paycheck.create({
     user: newUser._id,
-  })
+  });
 
   res.send({ success: true });
 });
@@ -41,16 +41,14 @@ router.put("/manager/:userid", auth, managerOnly, async (req, res) => {
     { _id: req.params.userid },
     { isManager: !user.isManager }
   );
-  console.log(updatedUser)
-  if (updatedUser.isManager){
-    await paycheck.deleteOne({user: updatedUser._id})
-  }
-  else {
+  console.log(updatedUser);
+  if (updatedUser.isManager) {
+    await paycheck.deleteOne({ user: updatedUser._id });
+  } else {
     await paycheck.create({
       user: updatedUser._id,
-    })
+    });
   }
-  
 
   res.send({ success: true });
 });
