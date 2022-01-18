@@ -141,7 +141,7 @@ const Manager = () => {
   };
 
   return (
-    <Layout>
+    <Layout title="Items">
       <Sidebar />
       <FAB onClick={() => setPopupOpen(true)}>
         <PlusIcon />
@@ -158,7 +158,7 @@ const Manager = () => {
                 className={styles["main__productList__productCard"]}
               >
                 <img src={product.picture} alt={product.name} />
-                <div style={{margin: "0"}}>
+                <div style={{ margin: "0" }}>
                   <h1>{product.name}</h1>
                 </div>
                 <div>

@@ -46,7 +46,7 @@ const Paychecks = () => {
     console.log(amount);
   }
   return (
-    <Layout>
+    <Layout title="Payments">
       <SideNav />
       <div className={styles.main}>
         <div className={styles.main__header}>

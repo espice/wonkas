@@ -70,7 +70,7 @@ const OompaLoompa = () => {
   };
 
   return (
-    <Layout>
+    <Layout title="Home">
       <SideNav></SideNav>
       <div className={styles.main}>
         <h1 className={styles.main__heading}>

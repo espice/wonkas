@@ -247,7 +247,7 @@ const Manager = () => {
   };
 
   return (
-    <Layout>
+    <Layout title="Home">
       <Sidebar />
       <FAB onClick={() => setPopupOpen(true)}>
         <PlusIcon />
