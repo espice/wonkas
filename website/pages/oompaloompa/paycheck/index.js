@@ -13,6 +13,7 @@ const PayCheck = () => {
   const [paycheckData, setpaycheckData] = useState(null);
   const [collectedCount, setCollectedCount] = useState(0);
   const [notCollectedCount, setNotCollectedCount] = useState(0);
+  const [reload, setReload] = useState(false);
 
   useEffect(async () => {
     const response = await axios.get("/api/paycheck");
@@ -28,14 +29,15 @@ const PayCheck = () => {
       }
     });
     setpaycheckData(data);
-  }, []);
+  }, [reload]);
 
   const markAsCollected = async (id) => {
     const response = await axios.post("/api/paycheck/collect", {
       paycheckId: id,
     });
     if (response.data.success) {
-      window.location.reload();
+      // window.location.reload();
+      setReload(!reload);
     }
   };
   return (
@@ -56,7 +58,10 @@ const PayCheck = () => {
             <p className={styles.main__content__category__heading}>Due</p>
             <div className={styles.main__content__category__content}>
               {paycheckData ? (
-                <div className={styles.main__content__category__content__row}>
+                <div
+                  className={styles.main__content__category__content__row}
+                  style={{ backgroundColor: "#fff", height: "90px", borderRadius: "6px" }}
+                >
                   <div
                     className={
                       styles.main__content__category__content__row__label

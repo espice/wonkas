@@ -115,6 +115,8 @@ export default function Chat() {
 
           <div ref={scrollRef}></div>
         </div>
+        {messages.length == 0 && <div className="noMessages">No Messages</div>}
+
         <form onSubmit={(e) => newMsg(e)} className={styles.main__form}>
           <input
             type="text"

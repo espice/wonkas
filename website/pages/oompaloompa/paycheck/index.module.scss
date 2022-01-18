@@ -69,6 +69,9 @@
           padding: 20px;
           display: flex;
           width: 100%;
+          background-color: #fff;
+          height: 90px;
+          border-radius: 6px;
 
           @media screen and (max-width: 600px) {
             flex-flow: column;
