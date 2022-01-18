@@ -1,5 +1,5 @@
 import Layout from "../../components/Layout";
-import styles from "../../styles/pages/store/index.module.scss";
+import styles from "./index.module.scss";
 import { useEffect, useState, useContext } from "react";
 import axios from "../../config/axios";
 import UserContext from "../../components/userContext";
@@ -30,8 +30,10 @@ export default function Store() {
     }
   }, [user]);
   return (
-    <Layout title="Store">
-      <div className={styles.container}>
+    <Layout title="Store" style={{
+      width: "100%",
+    }}>
+      <div>
         <div className={styles.container__heading}>
           <h1>Wonka's</h1>
           <p>Get your favorite wonka bars here.</p>
@@ -39,10 +41,11 @@ export default function Store() {
           <div className={styles.container__heading__main}>
             <SearchBar setSearchResults={setSearchResults} />
           </div>
-
-          {productList.map((product) => {
-            return <Product product={product} size="small" id={userId} />;
-          })}
+          <div className={styles.container}>
+            {productList.map((product) => {
+              return <Product product={product} size="small" id={userId} className={styles.Product} />;
+            })}
+          </div>
         </div>
       </div>
     </Layout>

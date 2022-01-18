@@ -1,8 +1,12 @@
 .product__small {
-  width: fit-content;
+  width: 500px;
+  height: 352px;
+  color: #FFFFFF;
+  border-right: 3px solid #E5E5E5;
+  border-bottom: 3px solid #E5E5E5;
   &__image {
-    width: 208px;
-    height: 208px;
+    width: 223px;
+    height: 156px;
   }
 
   text-align: center;
@@ -18,4 +22,8 @@
     font-weight: 400;
     color: #47505a;
   }
+}
+
+.marginPls{
+  margin-bottom: 10px;
 }

@@ -42,7 +42,7 @@ export default function Product({ product, size, id}) {
           alt={product.name}
           className={styles.product__small__image}
         />
-        <h2>{product.name}</h2>
+        <h2 className={styles.marginPls}>{product.name}</h2>
         <h3>${product.price}</h3>
         <p>{product.description}</p>
         <button onClick={(e) => {CartAppend(product)}}>Add to cart</button>
@@ -58,7 +58,7 @@ export default function Product({ product, size, id}) {
       />
 
       <div className={styles.product__large__info}>
-        <h2>{product.name}</h2>
+        <h2 className={styles.marginPls}>{product.name}</h2>
         <p>{product.description}</p>
         <button>Add to cart</button>
       </div>
