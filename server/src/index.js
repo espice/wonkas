@@ -93,6 +93,7 @@ app.use("/api/messages", messages);
 app.use("/oompaloompas", oompaloompas);
 app.use("/api/locations", locations);
 app.use("/api/total", total);
+
 app.use("/api/paycheck", paycheck);
 
 app.get("/", (req, res) => {

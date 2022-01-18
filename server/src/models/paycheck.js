@@ -15,9 +15,7 @@ const paycheckSchema = mongoose.Schema({
   },
   nextPaycheck: {
     type: Date,
-    default: new Date(
-      new Date(new Date().setMonth(new Date().getMonth() + 1)).setDate(1)
-    ),
+    required: [true, "Next paycheck is missing"],
   },
   paycheckHistory: {
     type: Array,
